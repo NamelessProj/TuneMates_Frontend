@@ -4,6 +4,7 @@ import {useAuthStore} from "../stores/authStore.js";
 import NProgress from "nprogress";
 import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
 import DefaultSpinner from "./DefaultSpinner.jsx";
+import {Link} from "react-router-dom";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -25,6 +26,13 @@ const LoginForm = () => {
 
         if (emailTrimmed === '' || password === '') {
             setError('Email and password are required.');
+
+            if (emailTrimmed === '') {
+                document.getElementById('email').focus();
+            } else {
+                document.getElementById('password').focus();
+            }
+
             return;
         }
 
@@ -39,7 +47,7 @@ const LoginForm = () => {
     }
 
     return (
-        <div>
+        <div className="mt-6 flex flex-col justify-center items-center gap-6">
             {userLoading ? (
                 <DefaultSpinner />
             ) : (
@@ -69,6 +77,8 @@ const LoginForm = () => {
                                 inputMode="email"
                                 size="lg"
                                 label="Email"
+                                name="email"
+                                id="email"
                                 required
                             />
                             <Input
@@ -77,6 +87,8 @@ const LoginForm = () => {
                                 type="password"
                                 size="lg"
                                 label="Password"
+                                name="password"
+                                id="password"
                                 required
                             />
                             <Button color="green" variant="gradient" onClick={handleSubmit}>
@@ -86,6 +98,9 @@ const LoginForm = () => {
                     </CardBody>
                 </Card>
             )}
+            <Typography>
+                Don&#39;t have an account? <Link to="/register">Register</Link>
+            </Typography>
         </div>
     );
 };

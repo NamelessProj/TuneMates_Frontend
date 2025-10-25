@@ -4,6 +4,7 @@ import {useUserStore} from "../stores/userStore.js";
 import DefaultSpinner from "./DefaultSpinner.jsx";
 import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
 import NProgress from "nprogress";
+import {Link} from "react-router-dom";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
@@ -19,6 +20,8 @@ const RegisterForm = () => {
         if(user) setCredentials(user);
     }, [user]);
 
+    const focusById = (id) => document.getElementById(id).focus();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -28,23 +31,32 @@ const RegisterForm = () => {
 
         if (emailForm === '' || password === '' || confirmPassword === '' || usernameForm === '') {
             setError('Please fill all fields');
+
+            if (confirmPassword === '') focusById('confirmPassword');
+            if (password === '') focusById('password');
+            if (usernameForm === '') focusById('username');
+            if (emailForm === '') focusById('email');
+
             return;
         }
 
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
         if (!emailRegex.test(emailForm)) {
             setError('Please enter a valid email');
+            focusById('email');
             return;
         }
 
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
         if (!passwordRegex.test(password)) {
             setError('Please enter a valid password');
+            focusById('password');
             return;
         }
 
         if (password !== confirmPassword) {
             setError('Passwords do not match');
+            focusById('confirmPassword');
             return;
         }
 
@@ -59,7 +71,7 @@ const RegisterForm = () => {
     }
 
     return (
-        <div className="mt-6 flex justify-center">
+        <div className="mt-6 flex flex-col justify-center items-center gap-6">
             {userLoading ? (
                 <DefaultSpinner />
             ) : (
@@ -87,6 +99,7 @@ const RegisterForm = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 type="email"
                                 inputMode="email"
+                                id="email"
                                 name="email"
                                 size="lg"
                                 label="Email"
@@ -95,6 +108,7 @@ const RegisterForm = () => {
                             <Input
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
+                                id="username"
                                 name="username"
                                 size="lg"
                                 label="Username"
@@ -104,6 +118,7 @@ const RegisterForm = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 type="password"
+                                id="password"
                                 name="password"
                                 size="lg"
                                 label="Password"
@@ -113,6 +128,7 @@ const RegisterForm = () => {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 type="password"
+                                id="confirmPassword"
                                 name="confirmpassword"
                                 size="lg"
                                 label="Confirm Password"
@@ -125,6 +141,9 @@ const RegisterForm = () => {
                     </CardBody>
                 </Card>
             )}
+            <Typography>
+                Already have an account? <Link to="/login">Login</Link>
+            </Typography>
         </div>
     );
 };

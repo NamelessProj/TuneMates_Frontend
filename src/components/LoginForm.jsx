@@ -5,6 +5,7 @@ import NProgress from "nprogress";
 import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
 import DefaultSpinner from "./DefaultSpinner.jsx";
 import {Link} from "react-router-dom";
+import focusById from "../utils/focusById.js";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -27,11 +28,8 @@ const LoginForm = () => {
         if (emailTrimmed === '' || password === '') {
             setError('Email and password are required.');
 
-            if (emailTrimmed === '') {
-                document.getElementById('email').focus();
-            } else {
-                document.getElementById('password').focus();
-            }
+            if (password === '') focusById('password');
+            if (emailTrimmed === '') focusById('email');
 
             return;
         }

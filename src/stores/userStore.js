@@ -16,9 +16,11 @@ export const useUserStore = create((set) => ({
                     withCredentials: true,
                     method: "POST",
                 });
-            set(() => ({user: res.data.user, token: res.data.token, userLoading: false}));
+            set(() => ({user: res.data.user, token: res.data.token}));
         }catch(err){
-            set({userError: err.response.data.message || err.message, userLoading: false});
+            set({userError: err?.response?.data?.message || err?.message || "Failed to register"});
+        }finally{
+            set({userLoading: false});
         }
     },
 
@@ -31,10 +33,11 @@ export const useUserStore = create((set) => ({
                     withCredentials: true,
                     method: "POST",
                 });
-            set(() => ({user: res.data.user, token: res.data.token, userLoading: false}));
-            console.log(data);
+            set(() => ({user: res.data.user, token: res.data.token}));
         }catch(err){
-            set({userError: err.response.data.message || err.message, userLoading: false});
+            set({userError: err?.response?.data?.message || err?.message || "Failed to login"});
+        }finally{
+            set({userLoading: false});
         }
     }
 }));

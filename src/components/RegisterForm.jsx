@@ -5,6 +5,7 @@ import DefaultSpinner from "./DefaultSpinner.jsx";
 import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
 import NProgress from "nprogress";
 import {Link} from "react-router-dom";
+import focusById from "../utils/focusById.js";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
@@ -18,9 +19,7 @@ const RegisterForm = () => {
 
     useEffect(() => {
         if(user) setCredentials(user);
-    }, [user]);
-
-    const focusById = (id) => document.getElementById(id).focus();
+    }, [user, setCredentials]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

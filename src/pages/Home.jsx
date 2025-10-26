@@ -83,6 +83,7 @@ const Home = () => {
                                 className="rounded-none"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                type="password"
                                 name="password"
                                 id="password"
                                 label="Enter the room's password"

@@ -39,8 +39,6 @@ const LoginForm = () => {
         try {
             NProgress.start();
             await login({email: emailTrimmed, password});
-        } catch(err) {
-            setError(err);
         } finally {
             NProgress.done();
         }
@@ -91,7 +89,7 @@ const LoginForm = () => {
                                 id="password"
                                 required
                             />
-                            <Button color="green" variant="gradient" onClick={handleSubmit}>
+                            <Button color="green" variant="gradient" onClick={handleSubmit} type="submit">
                                 Login
                             </Button>
                         </form>

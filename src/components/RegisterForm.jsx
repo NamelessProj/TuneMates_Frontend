@@ -63,8 +63,6 @@ const RegisterForm = () => {
         try {
             NProgress.start();
             await register({email: emailForm, username: usernameForm, password, confirmPassword});
-        } catch (err) {
-            setError(err);
         } finally {
             NProgress.done();
         }
@@ -134,7 +132,7 @@ const RegisterForm = () => {
                                 label="Confirm Password"
                                 required
                             />
-                            <Button color="green" variant="gradient" onClick={handleSubmit}>
+                            <Button color="green" variant="gradient" onClick={handleSubmit} type="submit">
                                 Register
                             </Button>
                         </form>

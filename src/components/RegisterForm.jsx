@@ -6,6 +6,7 @@ import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@mat
 import NProgress from "nprogress";
 import {Link} from "react-router-dom";
 import focusById from "../utils/focusById.js";
+import PasswordInput from "./PasswordInput.jsx";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
@@ -111,26 +112,8 @@ const RegisterForm = () => {
                                 label="Username"
                                 required
                             />
-                            <Input
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                type="password"
-                                id="password"
-                                name="password"
-                                size="lg"
-                                label="Password"
-                                required
-                            />
-                            <Input
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                type="password"
-                                id="confirmPassword"
-                                name="confirmpassword"
-                                size="lg"
-                                label="Confirm Password"
-                                required
-                            />
+                            <PasswordInput password={password} setPassword={setPassword} />
+                            <PasswordInput password={confirmPassword} setPassword={setConfirmPassword} label="Confirm Password" name="confirmPassword" id="confirmPassword" />
                             <Button color="green" variant="gradient" onClick={handleSubmit} type="submit">
                                 Register
                             </Button>

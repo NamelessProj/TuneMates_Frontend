@@ -6,6 +6,7 @@ import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@mat
 import DefaultSpinner from "./DefaultSpinner.jsx";
 import {Link} from "react-router-dom";
 import focusById from "../utils/focusById.js";
+import PasswordInput from "./PasswordInput.jsx";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -77,16 +78,7 @@ const LoginForm = () => {
                                 id="email"
                                 required
                             />
-                            <Input
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                type="password"
-                                size="lg"
-                                label="Password"
-                                name="password"
-                                id="password"
-                                required
-                            />
+                            <PasswordInput password={password} setPassword={setPassword} />
                             <Button color="green" variant="gradient" onClick={handleSubmit} type="submit">
                                 Login
                             </Button>

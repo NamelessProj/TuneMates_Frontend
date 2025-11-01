@@ -4,6 +4,7 @@ import {useRoomStore} from "../stores/roomStore.js";
 import NProgress from "nprogress";
 import DefaultSpinner from "../components/DefaultSpinner.jsx";
 import {useNavigate} from "react-router-dom";
+import PasswordInput from "../components/PasswordInput.jsx";
 
 const Home = () => {
     const [slug, setSlug] = useState("");
@@ -79,17 +80,7 @@ const Home = () => {
                                 label="Enter the room slug"
                                 required
                             />
-                            <Input
-                                className="rounded-none"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                type="password"
-                                name="password"
-                                id="password"
-                                label="Enter the room's password"
-                                variant="outlined"
-                                required
-                            />
+                            <PasswordInput password={password} setPassword={setPassword} label="Enter the room's password" />
                             <Button
                                 variant="gradient"
                                 color="green"

@@ -5,6 +5,7 @@ import NProgress from "nprogress";
 import DefaultSpinner from "../components/DefaultSpinner.jsx";
 import {useNavigate} from "react-router-dom";
 import PasswordInput from "../components/PasswordInput.jsx";
+import focusById from "../utils/focusById.js";
 
 const Home = () => {
     const [slug, setSlug] = useState("");
@@ -18,8 +19,6 @@ const Home = () => {
     useEffect(() => {
         if (room) navigate(`/room/${slug}`);
     }, [room, slug, navigate]);
-
-    const focusById = (id) => document.getElementById(id)?.focus();
 
     const handleJoinRoom = async (e) => {
         e.preventDefault();

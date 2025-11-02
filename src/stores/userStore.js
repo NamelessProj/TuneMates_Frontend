@@ -39,5 +39,41 @@ export const useUserStore = create((set) => ({
         }finally{
             set({userLoading: false});
         }
+    },
+
+    editUser: async (data, token) => {
+        set({userLoading: true, userError: null});
+        try{
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/me`,
+                data,
+                {
+                    withCredentials: true,
+                    Authorization: `Bearer ${token}`,
+                    method: "POST",
+                });
+            set(() => ({user: res.data.user}));
+        }catch(err){
+            set({user: null, userError: err?.response?.data?.message || err?.message || "Failed to edit user"});
+        }finally{
+            set({userLoading: false});
+        }
+    },
+
+    editUserPassword: async (data, token) => {
+        set({userLoading: true, userError: null});
+        try{
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/me/password`,
+                data,
+                {
+                    withCredentials: true,
+                    Authorization: `Bearer ${token}`,
+                    method: "POST",
+                });
+            set(() => ({user: res.data.user}));
+        }catch(err){
+            set({user: null, userError: err?.response?.data?.message || err?.message || "Failed to edit user's password"});
+        }finally{
+            set({userLoading: false});
+        }
     }
 }));

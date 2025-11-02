@@ -37,12 +37,12 @@ const Header = () => {
                         </MenuHandler>
                         <MenuList>
                             <MenuItem className="flex">
-                                <Link to="profile" className="flex-grow">
+                                <Link to="profile" className="flex-grow !text-black">
                                     Profile
                                 </Link>
                             </MenuItem>
                             <MenuItem className="flex">
-                                <Link to="rooms" className="flex-grow">
+                                <Link to="rooms" className="flex-grow !text-black">
                                     Rooms
                                 </Link>
                             </MenuItem>
@@ -51,9 +51,9 @@ const Header = () => {
                                     Logout
                                 </Button>
                             </MenuItem>
-                            {userInfo.spotifyId !== "" && (
+                            {userInfo.spotifyId !== "" ? null : (
                                 <MenuItem>
-                                    <Link to="/connect/spotify">
+                                    <Link to="connect/spotify">
                                         <Button
                                             variant="gradient"
                                             color="green"

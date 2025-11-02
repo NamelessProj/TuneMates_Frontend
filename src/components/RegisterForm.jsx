@@ -4,7 +4,7 @@ import {useUserStore} from "../stores/userStore.js";
 import DefaultSpinner from "./DefaultSpinner.jsx";
 import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
 import NProgress from "nprogress";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import focusById from "../utils/focusById.js";
 import PasswordInput from "./PasswordInput.jsx";
 
@@ -15,12 +15,18 @@ const RegisterForm = () => {
     const [username, setUsername] = useState('');
     const [error, setError] = useState('');
 
-    const {setCredentials} = useAuthStore();
+    const {userInfo, setCredentials} = useAuthStore();
     const {user, userError, userLoading, register} = useUserStore();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(user) setCredentials(user);
     }, [user, setCredentials]);
+
+    useEffect(() => {
+        if (userInfo) navigate("/");
+    }, [userInfo, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

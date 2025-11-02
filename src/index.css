@@ -12,5 +12,5 @@ body,
 }
 
 a:not(.not-green){
-    color: #1ED760!important;
+    color: #1ED760;
 }

@@ -4,6 +4,7 @@ import Home from "./pages/Home.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const App = () => {
     return (
@@ -12,6 +13,7 @@ const App = () => {
                 <Route index element={<Home />} />
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
+                <Route path="profile" element={<Profile />} />
                 <Route path="*" element={<ErrorPage />} />
             </Route>
         </Routes>

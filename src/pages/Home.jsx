@@ -79,7 +79,12 @@ const Home = () => {
                                 label="Enter the room slug"
                                 required
                             />
-                            <PasswordInput password={password} setPassword={setPassword} label="Enter the room's password" />
+                            <PasswordInput
+                                password={password}
+                                setPassword={setPassword}
+                                label="Enter the room's password"
+                                inputClassName="rounded-none"
+                            />
                             <Button
                                 variant="gradient"
                                 color="green"

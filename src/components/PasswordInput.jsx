@@ -1,13 +1,13 @@
 import {Button, Input} from "@material-tailwind/react";
 import {useState} from "react";
 
-const PasswordInput = ({password, setPassword, label="Password", name="password", id="password"}) => {
+const PasswordInput = ({password, setPassword, label="Password", name="password", id="password", inputClassName=""}) => {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     return (
         <div className="relative">
             <Input
-                className="rounded-none"
+                className={inputClassName}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type={passwordVisible ? "text" : "password"}

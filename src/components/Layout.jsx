@@ -9,6 +9,7 @@ const Layout = () => {
             <ToastContainer theme="dark" />
             <Header />
             <Outlet />
+            <div></div>
             <Footer />
         </div>
     );

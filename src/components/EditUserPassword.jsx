@@ -19,6 +19,11 @@ const EditUserPassword = ({token}) => {
             return;
         }
 
+        if (newPassword.length < 8 || newPassword.length > 20) {
+            setError("New password must be between 8 and 20 characters");
+            return;
+        }
+
         if (newPassword !== confirmPassword) {
             setError("New password and confirm password do not match");
             return;

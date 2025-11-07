@@ -48,8 +48,10 @@ export const useUserStore = create((set) => ({
                 data,
                 {
                     withCredentials: true,
-                    Authorization: `Bearer ${token}`,
                     method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
                 });
             set(() => ({user: res.data.user}));
         }catch(err){
@@ -66,8 +68,10 @@ export const useUserStore = create((set) => ({
                 data,
                 {
                     withCredentials: true,
-                    Authorization: `Bearer ${token}`,
                     method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
                 });
             set(() => ({user: res.data.user}));
         }catch(err){

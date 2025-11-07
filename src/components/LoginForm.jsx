@@ -13,14 +13,14 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const {user, userError, userLoading, login} = useUserStore();
+    const {user, token, userError, userLoading, login} = useUserStore();
     const {userInfo, setCredentials} = useAuthStore();
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user) setCredentials(user);
-    }, [user, setCredentials]);
+        if (user) setCredentials({user, token});
+    }, [user, token, setCredentials]);
 
     useEffect(() => {
         if (userInfo) navigate("/");

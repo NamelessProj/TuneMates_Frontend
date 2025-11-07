@@ -5,6 +5,7 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Profile from "./pages/Profile.jsx";
+import Rooms from "./pages/Rooms.jsx";
 
 const App = () => {
     return (
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="profile" element={<Profile />} />
+                <Route path="rooms" element={<Rooms />} />
                 <Route path="*" element={<ErrorPage />} />
             </Route>
         </Routes>

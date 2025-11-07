@@ -83,7 +83,7 @@ const Home = () => {
                                 password={password}
                                 setPassword={setPassword}
                                 label="Enter the room's password"
-                                inputClassName="rounded-none"
+                                inputClassName="!rounded-none"
                             />
                             <Button
                                 variant="gradient"

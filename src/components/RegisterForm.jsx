@@ -16,13 +16,13 @@ const RegisterForm = () => {
     const [error, setError] = useState('');
 
     const {userInfo, setCredentials} = useAuthStore();
-    const {user, userError, userLoading, register} = useUserStore();
+    const {user, token, userError, userLoading, register} = useUserStore();
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(user) setCredentials(user);
-    }, [user, setCredentials]);
+        if(user) setCredentials({user, token});
+    }, [user, token, setCredentials]);
 
     useEffect(() => {
         if (userInfo) navigate("/");

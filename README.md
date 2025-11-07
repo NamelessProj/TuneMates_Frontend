@@ -7,3 +7,12 @@
 This is the frontend repo for TuneMates, a platform that make collaborative music playlists easy to maintain while keeping other from adding unwanted songs.
 
 You can find the backend repo [here](https://github.com/NamelessProj/TuneMates_Backend).
+
+## Routes
+| Route       | Description                                  |
+|-------------|----------------------------------------------|
+| `/`         | Landing page with app overview and features. |
+| `/login`    | User login page.                             |
+| `/register` | User registration page.                      |
+| `/profile`  | User profile management page.                |
+| `/rooms`    | List of the user's rooms.                    |

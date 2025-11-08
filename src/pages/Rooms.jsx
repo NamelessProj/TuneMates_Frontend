@@ -1,9 +1,9 @@
 import {useRoomStore} from "../stores/roomStore.js";
 import {useAuthStore} from "../stores/authStore.js";
 import DefaultSpinner from "../components/DefaultSpinner.jsx";
-import {Alert} from "@material-tailwind/react";
+import {Alert, Button} from "@material-tailwind/react";
 import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import RoomList from "../components/RoomList.jsx";
 
 const Rooms = () => {
@@ -21,11 +21,19 @@ const Rooms = () => {
     return (
         <main className="flex justify-center items-center">
             {roomLoading ? <DefaultSpinner/> : (
-                <div>
+                <div className="flex flex-col justify-center items-center gap-6">
                     {roomError && (
                         <Alert color="red">
                             {roomError}
                         </Alert>
+                    )}
+
+                    {(!userRooms || userRooms.length < 10) && (
+                        <Link to="create">
+                            <Button variant="gradient" color="green">
+                                Create New Room
+                            </Button>
+                        </Link>
                     )}
 
                     <RoomList rooms={userRooms} />

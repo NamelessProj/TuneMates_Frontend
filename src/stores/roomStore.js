@@ -42,5 +42,23 @@ export const useRoomStore = create((set) => ({
         } finally {
             set({roomLoading: false});
         }
+    },
+
+    createRoom: async (data, token) => {
+        set({roomLoading: true, roomError: null, room: null});
+        try {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/rooms`, data,{
+                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                method: "POST",
+            });
+            set(() => ({room: res.data.room}));
+        } catch (err) {
+            set({room: null, roomError: err?.response?.data?.message || err?.message || "Failed to create room"});
+        } finally {
+            set({roomLoading: false});
+        }
     }
 }));

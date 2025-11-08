@@ -1,12 +1,12 @@
 import {Typography} from "@material-tailwind/react";
 import RoomListEl from "./RoomListEl.jsx";
 
-const RoomList = ({rooms}) => {
+const RoomList = ({rooms, token}) => {
     return (
         <div>
             {(rooms && rooms.length) ? (
                 rooms.map((room) => (
-                    <RoomListEl room={room} key={room.id} />
+                    <RoomListEl room={room} token={token} key={room.id} />
                 ))
             ) : (
                 <Typography>

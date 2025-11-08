@@ -36,7 +36,7 @@ const Rooms = () => {
                         </Link>
                     )}
 
-                    <RoomList rooms={userRooms} />
+                    <RoomList rooms={userRooms} token={userToken} />
                 </div>
             )}
         </main>

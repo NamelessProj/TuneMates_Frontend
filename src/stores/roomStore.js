@@ -6,6 +6,7 @@ export const useRoomStore = create((set) => ({
     userRooms: null,
     roomLoading: false,
     roomError: null,
+    deleteSuccess: false,
 
     getRoomBySlug: async (slug, password) => {
         set({roomLoading: true, roomError: null});
@@ -57,6 +58,24 @@ export const useRoomStore = create((set) => ({
             set(() => ({room: res.data.room}));
         } catch (err) {
             set({room: null, roomError: err?.response?.data?.message || err?.message || "Failed to create room"});
+        } finally {
+            set({roomLoading: false});
+        }
+    },
+
+    deleteRoom: async (id, token) => {
+        set({roomLoading: true, roomError: null, deleteSuccess: false});
+        try {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/rooms/${id}`,{
+                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                method: "DELETE",
+            });
+            set(() => ({deleteSuccess: true}));
+        } catch (err) {
+            set({deleteSuccess: null, roomError: err?.response?.data?.message || err?.message || "Failed to delete room"});
         } finally {
             set({roomLoading: false});
         }

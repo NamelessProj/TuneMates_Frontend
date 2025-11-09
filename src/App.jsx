@@ -7,6 +7,7 @@ import Register from "./pages/Register.jsx";
 import Profile from "./pages/Profile.jsx";
 import Rooms from "./pages/Rooms.jsx";
 import CreateRoom from "./pages/CreateRoom.jsx";
+import SpotifyConnect from "./pages/SpotifyConnect.jsx";
 
 const App = () => {
     return (
@@ -19,6 +20,10 @@ const App = () => {
                 <Route path="rooms">
                     <Route index element={<Rooms />} />
                     <Route path="create" element={<CreateRoom />} />
+                </Route>
+                <Route path="spotify">
+                    <Route path="connect" element={<SpotifyConnect />} />
+                    <Route path="callback" />
                 </Route>
                 <Route path="*" element={<ErrorPage />} />
             </Route>

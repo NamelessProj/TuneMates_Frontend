@@ -37,7 +37,7 @@ const SpotifyCallback = () => {
         if (code && state) {
             NProgress.start();
             setCurrentStep("Fetching Spotify access token...");
-            fetchAccessToken(code);
+            fetchAccessToken(code); // TODO: Sending that to my backend to get the access token securely
             setCurrentStep("");
         }
     }, [userInfo, userToken, error, code, state, navigate, fetchAccessToken]);

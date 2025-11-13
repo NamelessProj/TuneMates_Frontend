@@ -1,6 +1,8 @@
 import {create} from "zustand";
 import axios from "axios";
 
+const baseUrl = `${import.meta.env.VITE_API_URL}/users`;
+
 export const useUserStore = create((set) => ({
     user: null,
     token: null,
@@ -10,7 +12,7 @@ export const useUserStore = create((set) => ({
     register: async (data) => {
         set({userLoading: true, userError: null});
         try{
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/register`,
+            const res = await axios.post(`${baseUrl}/register`,
                 data,
                 {
                     withCredentials: true,
@@ -27,7 +29,7 @@ export const useUserStore = create((set) => ({
     login: async (data) => {
         set({userLoading: true, userError: null});
         try{
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`,
+            const res = await axios.post(`${baseUrl}/login`,
                 data,
                 {
                     withCredentials: true,
@@ -44,7 +46,7 @@ export const useUserStore = create((set) => ({
     editUser: async (data, token) => {
         set({userLoading: true, userError: null});
         try{
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/me`,
+            const res = await axios.post(`${baseUrl}/me`,
                 data,
                 {
                     withCredentials: true,
@@ -64,7 +66,7 @@ export const useUserStore = create((set) => ({
     editUserPassword: async (data, token) => {
         set({userLoading: true, userError: null});
         try{
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/me/password`,
+            const res = await axios.post(`${baseUrl}/me/password`,
                 data,
                 {
                     withCredentials: true,
@@ -84,7 +86,7 @@ export const useUserStore = create((set) => ({
     connectUserToSpotify: async (code, state, token) => {
         set({userLoading: true, userError: null});
         try{
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/spotify/connect/${code}/${state}`,
+            const res = await axios.post(`${baseUrl}/spotify/connect/${code}/${state}`,
                 null,
                 {
                     withCredentials: true,

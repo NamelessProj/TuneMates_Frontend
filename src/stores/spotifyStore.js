@@ -1,6 +1,8 @@
 import {create} from "zustand";
 import axios from "axios";
 
+const baseUrl = `${import.meta.env.VITE_API_URL}/spotify`;
+
 export const useSpotifyStore = create((set) => ({
     spotifyAuthUrl: null,
     spotifyLoading: false,
@@ -9,7 +11,7 @@ export const useSpotifyStore = create((set) => ({
     fetchSpotifyAuthUrl: async () => {
         set({spotifyLoading: true, spotifyError: null});
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}/spotify/oathlink`, {
+            const res = await axios.get(`${baseUrl}/oathlink`, {
                 withCredentials: true,
                 method: "GET"
             });

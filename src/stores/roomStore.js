@@ -1,6 +1,8 @@
 import {create} from "zustand";
 import axios from "axios";
 
+const baseUrl = `${import.meta.env.VITE_API_URL}/rooms`;
+
 export const useRoomStore = create((set) => ({
     room: null,
     userRooms: null,
@@ -11,7 +13,7 @@ export const useRoomStore = create((set) => ({
     getRoomBySlug: async (slug, password) => {
         set({roomLoading: true, roomError: null});
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/rooms/slug/${slug}`,
+            const res = await axios.post(`${baseUrl}/slug/${slug}`,
                 {
                     password
                 },
@@ -30,7 +32,7 @@ export const useRoomStore = create((set) => ({
     getUserRooms: async (token) => {
         set({roomLoading: true, roomError: null});
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}/rooms`, {
+            const res = await axios.get(`${baseUrl}`, {
                 withCredentials: true,
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -48,7 +50,7 @@ export const useRoomStore = create((set) => ({
     createRoom: async (data, token) => {
         set({roomLoading: true, roomError: null, room: null});
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/rooms`, data,{
+            const res = await axios.post(`${baseUrl}`, data,{
                 withCredentials: true,
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -66,7 +68,7 @@ export const useRoomStore = create((set) => ({
     deleteRoom: async (id, token) => {
         set({roomLoading: true, roomError: null, deleteSuccess: false});
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL}/rooms/${id}`,{
+            await axios.delete(`${baseUrl}/${id}`,{
                 withCredentials: true,
                 headers: {
                     Authorization: `Bearer ${token}`

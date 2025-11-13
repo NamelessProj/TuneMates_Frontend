@@ -79,5 +79,25 @@ export const useUserStore = create((set) => ({
         }finally{
             set({userLoading: false});
         }
+    },
+
+    connectUserToSpotify: async (code, state, token) => {
+        set({userLoading: true, userError: null});
+        try{
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/spotify/connect/${code}/${state}`,
+                null,
+                {
+                    withCredentials: true,
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                });
+            set(() => ({user: res.data.user}));
+        }catch(err){
+            set({user: null, userError: err?.response?.data?.message || err?.message || "Failed to connect user to Spotify"});
+        }finally{
+            set({userLoading: false});
+        }
     }
 }));

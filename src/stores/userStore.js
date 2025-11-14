@@ -57,7 +57,7 @@ export const useUserStore = create((set) => ({
                 });
             set(() => ({user: res.data.user}));
         }catch(err){
-            set({user: null, userError: err?.response?.data?.message || err?.message || "Failed to edit user"});
+            set({userError: err?.response?.data?.message || err?.message || "Failed to edit user"});
         }finally{
             set({userLoading: false});
         }
@@ -77,7 +77,7 @@ export const useUserStore = create((set) => ({
                 });
             set(() => ({user: res.data.user}));
         }catch(err){
-            set({user: null, userError: err?.response?.data?.message || err?.message || "Failed to edit user's password"});
+            set({userError: err?.response?.data?.message || err?.message || "Failed to edit user's password"});
         }finally{
             set({userLoading: false});
         }
@@ -97,7 +97,29 @@ export const useUserStore = create((set) => ({
                 });
             set(() => ({user: res.data.user}));
         }catch(err){
-            set({user: null, userError: err?.response?.data?.message || err?.message || "Failed to connect user to Spotify"});
+            set({userError: err?.response?.data?.message || err?.message || "Failed to connect user to Spotify"});
+        }finally{
+            set({userLoading: false});
+        }
+    },
+
+    deleteUser: async (password, token) => {
+        set({userLoading: true, userError: null});
+        try{
+            await axios.post(`${baseUrl}/delete/me`,
+                {
+                    password
+                },
+                {
+                    withCredentials: true,
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                });
+            set(() => ({user: null}));
+        }catch(err){
+            set({userError: err?.response?.data?.message || err?.message || "Failed to delete user"});
         }finally{
             set({userLoading: false});
         }

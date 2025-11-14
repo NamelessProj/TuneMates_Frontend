@@ -5,6 +5,7 @@ import DefaultSpinner from "../components/DefaultSpinner.jsx";
 import {useEffect} from "react";
 import EditUser from "../components/EditUser.jsx";
 import EditUserPassword from "../components/EditUserPassword.jsx";
+import DeleteUser from "../components/DeleteUser.jsx";
 
 const Profile = () => {
     const {userInfo, setCredentials} = useAuthStore();
@@ -35,6 +36,8 @@ const Profile = () => {
                         <EditUser userInfo={userInfo} token={token} />
 
                         <EditUserPassword token={token} />
+
+                        <DeleteUser token={token} />
                     </div>
                 </div>
             )}

@@ -53,7 +53,7 @@ const Header = () => {
                             </MenuItem>
                             {userInfo.spotifyId !== "" ? null : (
                                 <MenuItem>
-                                    <Link to="connect/spotify">
+                                    <Link to="spotify/connect">
                                         <Button
                                             variant="gradient"
                                             color="green"

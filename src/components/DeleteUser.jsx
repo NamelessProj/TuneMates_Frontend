@@ -47,32 +47,42 @@ const DeleteUser = ({token}) => {
                 open={open}
                 handler={handleOpen}
             >
-                <DialogHeader>
+                <DialogHeader className="flex justify-center">
                     <Typography variant="h2">
                         Deleting Your Account
                     </Typography>
                 </DialogHeader>
                 <DialogBody>
-                    <Typography>
+                    <Typography className="text-center text-balance">
                         This action can not be undone. Are you sure you want to delete your account?
                     </Typography>
-                    <Button
-                        color="red"
-                        onClick={handleDeleting}
-                    >
-                        I&#39;m sure, Delete My Account
-                    </Button>
+                    <div className="flex justify-evenly mt-6">
+                        <Button
+                            color="blue"
+                            onClick={handleOpen}
+                        >
+                            Cancel
+                        </Button>
+
+                        <Button
+                            color="red"
+                            onClick={handleDeleting}
+                        >
+                            I&#39;m sure, Delete My Account
+                        </Button>
+                    </div>
                 </DialogBody>
             </Dialog>
 
-            <Card color="red">
-                <CardHeader>
+            <Card>
+                <CardHeader color="red">
                     <Typography variant="h3">
                         Deleting your account
                     </Typography>
                 </CardHeader>
                 <CardBody>
                     <form
+                        className="flex flex-col gap-4"
                         onSubmit={handleOpen}
                     >
                         {error && <Alert color="red">{error}</Alert>}
@@ -85,6 +95,7 @@ const DeleteUser = ({token}) => {
                         <Button
                             type="submit"
                             onClick={handleOpen}
+                            color="red"
                         >
                             Deleting your account
                         </Button>

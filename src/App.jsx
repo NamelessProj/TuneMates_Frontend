@@ -9,6 +9,7 @@ import Rooms from "./pages/Rooms.jsx";
 import CreateRoom from "./pages/CreateRoom.jsx";
 import SpotifyConnect from "./pages/SpotifyConnect.jsx";
 import SpotifyCallback from "./pages/SpotifyCallback.jsx";
+import RoomPage from "./pages/RoomPage.jsx";
 
 const App = () => {
     return (
@@ -26,6 +27,7 @@ const App = () => {
                     <Route path="connect" element={<SpotifyConnect />} />
                     <Route path="callback" element={<SpotifyCallback />} />
                 </Route>
+                <Route path="room/:slug" element={<RoomPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Route>
         </Routes>

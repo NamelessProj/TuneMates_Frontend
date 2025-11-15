@@ -11,18 +11,20 @@ const Home = () => {
     const [slug, setSlug] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const navigate = useNavigate();
 
     const {room, roomError, roomLoading, getRoomBySlug} = useRoomStore();
 
     useEffect(() => {
-        if (room) navigate(`/room/${slug}`);
-    }, [room, slug, navigate]);
+        if (room && hasSubmitted) navigate(`/room/${slug}`);
+    }, [room, hasSubmitted, slug, navigate]);
 
     const handleJoinRoom = async (e) => {
         e.preventDefault();
         setError("");
+        setHasSubmitted(false);
 
         const roomSlug = slug.replace(/(\s+|-+)/g, "-").replace(/-+$/g, "").toLowerCase();
         setSlug(roomSlug);
@@ -42,6 +44,7 @@ const Home = () => {
         try {
             NProgress.start();
             await getRoomBySlug(roomSlug, password);
+            setHasSubmitted(true);
         } finally {
             NProgress.done();
         }

@@ -39,7 +39,7 @@ export const useRoomStore = create((set) => ({
                 },
                 method: "GET",
             });
-            set(() => ({userRooms: res.data.rooms}));
+            set(() => ({userRooms: res.data}));
         } catch (err) {
             set({userRooms: null, roomError: err?.response?.data?.message || err?.message || "Failed to load user rooms"});
         } finally {

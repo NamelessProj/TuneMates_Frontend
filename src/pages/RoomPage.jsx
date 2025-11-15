@@ -2,6 +2,7 @@ import {useRoomStore} from "../stores/roomStore.js";
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect} from "react";
 import {Typography} from "@material-tailwind/react";
+import SearchSongs from "../components/SearchSongs.jsx";
 
 const RoomPage = () => {
     const navigate = useNavigate();
@@ -24,6 +25,8 @@ const RoomPage = () => {
                             {room.name}
                         </Typography>
                     </div>
+
+                    <SearchSongs />
                 </main>
             ) : null}
         </>

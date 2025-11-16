@@ -1,10 +1,11 @@
-import {Link} from "react-router-dom";
 import {Button, Menu, MenuHandler, MenuItem, MenuList, Typography} from "@material-tailwind/react";
 import {useAuthStore} from "../stores/authStore.js";
 import NProgress from "nprogress";
+import {useEffect} from "react";
+import {Link} from "react-router-dom";
 
 const Header = () => {
-    const {userInfo, logout} = useAuthStore();
+    const {userInfo, userToken, userTokenExpiresAt, logout} = useAuthStore();
 
     const handleLogout = (e) => {
         e.preventDefault();
@@ -18,6 +19,16 @@ const Header = () => {
             NProgress.done();
         }
     }
+
+    // Auto logout if token is expired
+    useEffect(() => {
+        if (userInfo) {
+            if (!userToken || (userTokenExpiresAt && Date.now() >= userTokenExpiresAt)) {
+                logout();
+            }
+        }
+
+    }, [userInfo, userToken, userTokenExpiresAt, logout]);
 
     return (
         <header className="flex flex-col-reverse gap-2 justify-center items-center my-2 relative">

@@ -1,16 +1,41 @@
 import SearchSongsForm from "./SearchSongsForm.jsx";
-import {useSpotifyStore} from "../stores/spotifyStore.js";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import NProgress from "nprogress";
+import axios from "axios";
+import SongList from "./SongList.jsx";
 
 const SearchSongs = () => {
     const [input, setInput] = useState("");
     const [error, setError] = useState("");
     const [offset, setOffset] = useState(0);
-    const [songs, setSongs] = useState([]);
-    const [limit, setLimit] = useState(0);
 
-    const {searchedSongs, spotifyLoading, spotifyError, searchSongs} = useSpotifyStore();
+    const [loading, setLoading] = useState(false);
+    const [songsError, setSongsError] = useState("");
+    const [songs, setSongs] = useState([]);
+    const [hasMore, setHasMore] = useState(false);
+
+    const baseUrl = `${import.meta.env.VITE_API_URL}/spotify`;
+
+    const searchSongs = async (q) => {
+        setSongsError("");
+        const market = 'US';
+        let results;
+
+        try {
+            NProgress.start();
+            const res = await axios.get(`${baseUrl}/search/${q}/${offset}/${market}`, {
+                withCredentials: true,
+                method: "GET"
+            });
+            results = res.data;
+        } catch (err) {
+            setSongsError(err?.response?.data?.message || err?.message || "Failed to search songs on Spotify");
+        } finally {
+            NProgress.done();
+        }
+
+        return results;
+    }
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -22,20 +47,39 @@ const SearchSongs = () => {
             return;
         }
 
-        NProgress.start();
-        await searchSongs(q, offset);
-        NProgress.done();
+        setLoading(true);
+
+        const songs = await searchSongs(q);
+        setSongs(songs.items || []);
+        setHasMore(songs.hasMore || false);
+        setOffset(songs.nextOffset || 0);
+
+        setLoading(false);
     }
 
-    const loadMoreSongs = async () => {
-        if (spotifyLoading || !searchedSongs) return;
+    const handleLoadMore = async (e) => {
+        e.preventDefault();
+        setSongsError("");
 
-        const newOffset = searchedSongs.nextOffset;
-        setOffset(newOffset);
+        if (!hasMore) {
+            setSongsError("No more songs to load.");
+            return;
+        }
 
-        NProgress.start();
-        await searchSongs(input.trim(), newOffset);
-        NProgress.done();
+        const q = input.trim();
+        if (q.length === 0) {
+            setSongsError("Please enter a search term.");
+            return;
+        }
+
+        setLoading(true);
+
+        const moreSongs = await searchSongs(q);
+        setSongs(prevSongs => [...prevSongs, ...(moreSongs.items || [])]);
+        setHasMore(moreSongs.hasMore || false);
+        setOffset(moreSongs.nextOffset || 0);
+
+        setLoading(false);
     }
 
     return (
@@ -45,6 +89,14 @@ const SearchSongs = () => {
                 setInput={setInput}
                 error={error}
                 handleSearch={handleSearch}
+            />
+
+            <SongList
+                songs={songs}
+                loading={loading}
+                error={songsError}
+                handleLoadMore={handleLoadMore}
+                hasMore={hasMore}
             />
         </div>
     );

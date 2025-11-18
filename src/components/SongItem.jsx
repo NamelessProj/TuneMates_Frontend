@@ -1,6 +1,6 @@
 import {Avatar, Button, Card, CardHeader, Typography} from "@material-tailwind/react";
 
-const SongItem = ({song, calcDuration}) => {
+const SongItem = ({song, calcDuration, handleSendSongToRoom}) => {
     return (
         <Card
             color="transparent"
@@ -28,6 +28,7 @@ const SongItem = ({song, calcDuration}) => {
                             size="sm"
                             color="green"
                             variant="gradient"
+                            onClick={(e) => handleSendSongToRoom(e, song.uri)}
                         >
                             Send Request
                         </Button>

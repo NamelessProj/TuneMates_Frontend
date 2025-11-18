@@ -2,7 +2,7 @@ import DefaultSpinner from "./DefaultSpinner.jsx";
 import {Alert, Button} from "@material-tailwind/react";
 import SongItem from "./SongItem.jsx";
 
-const SongList = ({songs, hasMore, error, handleLoadMore, loading}) => {
+const SongList = ({songs, hasMore, error, handleLoadMore, loading, songError, handleSendSongToRoom}) => {
     const durationMsToMinutesSeconds = (durationMs) => {
         const minutes = Math.floor(durationMs / 60000);
         const seconds = Math.floor((durationMs % 60000) / 1000);
@@ -13,7 +13,12 @@ const SongList = ({songs, hasMore, error, handleLoadMore, loading}) => {
         <div className="flex flex-col items-center mt-6">
             {songs.length > 0 ? (
                 <div>
-                    {songs.map((song, i) => <SongItem song={song} calcDuration={durationMsToMinutesSeconds} key={i} />)}
+                    {songs.map((song, i) => <SongItem
+                        song={song}
+                        calcDuration={durationMsToMinutesSeconds}
+                        handleSendSongToRoom={handleSendSongToRoom}
+                        key={i}
+                    />)}
                 </div>
             ) : (
                 <div className="flex flex-col items-center justify-center">

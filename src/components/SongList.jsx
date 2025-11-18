@@ -2,7 +2,7 @@ import DefaultSpinner from "./DefaultSpinner.jsx";
 import {Alert, Button} from "@material-tailwind/react";
 import SongItem from "./SongItem.jsx";
 
-const SongList = ({songs, hasMore, error, handleLoadMore, loading, handleSendSongToRoom}) => {
+const SongList = ({songs, hasMore, error, loading, handleLoadMore, handleSendSongToRoom}) => {
     const durationMsToMinutesSeconds = (durationMs) => {
         const minutes = Math.floor(durationMs / 60000);
         const seconds = Math.floor((durationMs % 60000) / 1000);

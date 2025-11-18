@@ -1,9 +1,10 @@
 import SearchSongsForm from "./SearchSongsForm.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import NProgress from "nprogress";
 import axios from "axios";
 import SongList from "./SongList.jsx";
 import {useSongStore} from "../stores/songStore.js";
+import {toast} from "react-toastify";
 
 const SearchSongs = ({roomId}) => {
     const [input, setInput] = useState("");
@@ -15,7 +16,11 @@ const SearchSongs = ({roomId}) => {
     const [songs, setSongs] = useState([]);
     const [hasMore, setHasMore] = useState(false);
 
-    const {songError, sendSongToRoom} = useSongStore();
+    const {songError, songLoading, sendSongToRoom} = useSongStore();
+
+    useEffect(() => {
+        if (songError && !songLoading) toast(songError, {type: "error"});
+    }, [songError, songLoading]);
 
     const baseUrl = `${import.meta.env.VITE_API_URL}/spotify`;
 
@@ -90,6 +95,7 @@ const SearchSongs = ({roomId}) => {
 
         NProgress.start();
         await sendSongToRoom(songId, roomId);
+        toast("Requested song successfully!", {type: "success"});
         NProgress.done();
     }
 
@@ -108,7 +114,6 @@ const SearchSongs = ({roomId}) => {
                 error={songsError}
                 handleLoadMore={handleLoadMore}
                 hasMore={hasMore}
-                songError={songError}
                 handleSendSongToRoom={handleSendSongToRoom}
             />
         </div>

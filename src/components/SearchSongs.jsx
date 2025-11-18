@@ -3,8 +3,9 @@ import {useState} from "react";
 import NProgress from "nprogress";
 import axios from "axios";
 import SongList from "./SongList.jsx";
+import {useSongStore} from "../stores/songStore.js";
 
-const SearchSongs = () => {
+const SearchSongs = ({roomId}) => {
     const [input, setInput] = useState("");
     const [error, setError] = useState("");
     const [offset, setOffset] = useState(0);
@@ -13,6 +14,8 @@ const SearchSongs = () => {
     const [songsError, setSongsError] = useState("");
     const [songs, setSongs] = useState([]);
     const [hasMore, setHasMore] = useState(false);
+
+    const {songError, sendSongToRoom} = useSongStore();
 
     const baseUrl = `${import.meta.env.VITE_API_URL}/spotify`;
 
@@ -82,6 +85,14 @@ const SearchSongs = () => {
         setLoading(false);
     }
 
+    const handleSendSongToRoom = async (e, songId) => {
+        e.preventDefault();
+
+        NProgress.start();
+        await sendSongToRoom(songId, roomId);
+        NProgress.done();
+    }
+
     return (
         <div>
             <SearchSongsForm
@@ -97,6 +108,8 @@ const SearchSongs = () => {
                 error={songsError}
                 handleLoadMore={handleLoadMore}
                 hasMore={hasMore}
+                songError={songError}
+                handleSendSongToRoom={handleSendSongToRoom}
             />
         </div>
     );

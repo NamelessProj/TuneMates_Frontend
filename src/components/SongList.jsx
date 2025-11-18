@@ -10,35 +10,37 @@ const SongList = ({songs, hasMore, error, handleLoadMore, loading}) => {
     }
 
     return (
-        <div className="flex items-center mt-6">
-            {loading ? <DefaultSpinner /> : (
-                <>
-                    {songs.length > 0 ? (
-                        <div>
-                            {songs.map((song, i) => <SongItem song={song} calcDuration={durationMsToMinutesSeconds} key={i} />)}
-
-                            {hasMore ? (
-                                <div className="flex items-center my-6">
-                                    <Button
-                                        color="green"
-                                        variant="gradient"
-                                        className="mt-4"
-                                        onClick={handleLoadMore}
-                                    >
-                                        Load More
-                                    </Button>
-                                </div>
-                            ) : null}
-                        </div>
-                    ) : (
-                        <div className="flex flex-col items-center justify-center">
-                            <Alert color="red">
-                                {error ? error : "No songs found."}
-                            </Alert>
-                        </div>
-                    )}
-                </>
+        <div className="flex flex-col items-center mt-6">
+            {songs.length > 0 ? (
+                <div>
+                    {songs.map((song, i) => <SongItem song={song} calcDuration={durationMsToMinutesSeconds} key={i} />)}
+                </div>
+            ) : (
+                <div className="flex flex-col items-center justify-center">
+                    <Alert color="red">
+                        {error ? error : "No songs found."}
+                    </Alert>
+                </div>
             )}
+
+            <div className="flex flex-col items-center justify-center my-3">
+                {loading ? <DefaultSpinner /> : (
+                    <>
+                        {(songs.length > 0 && hasMore) ? (
+                            <div className="flex items-center">
+                                <Button
+                                    color="green"
+                                    variant="gradient"
+                                    className="mt-4"
+                                    onClick={handleLoadMore}
+                                >
+                                    Load More
+                                </Button>
+                            </div>
+                        ) : null}
+                    </>
+                )}
+            </div>
         </div>
     );
 };

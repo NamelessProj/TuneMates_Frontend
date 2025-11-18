@@ -26,7 +26,7 @@ const RoomPage = () => {
                         </Typography>
                     </div>
 
-                    <SearchSongs />
+                    <SearchSongs roomId={room.id} />
                 </main>
             ) : null}
         </>

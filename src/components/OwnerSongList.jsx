@@ -2,7 +2,7 @@ import SongItem from "./SongItem.jsx";
 import parseMsToMinutesSeconds from "../utils/parseMsToMinutesSeconds.js";
 import {Typography} from "@material-tailwind/react";
 
-const OwnerSongList = ({songs}) => {
+const OwnerSongList = ({songs, handleAddSongToPlaylist}) => {
     return (
         <div className="my-6">
             {songs.length > 0 ? (
@@ -10,6 +10,7 @@ const OwnerSongList = ({songs}) => {
                     key={i}
                     song={song}
                     calcDuration={parseMsToMinutesSeconds}
+                    handleAddSongToPlaylist={handleAddSongToPlaylist}
                 />)
             ) : (
                 <div>

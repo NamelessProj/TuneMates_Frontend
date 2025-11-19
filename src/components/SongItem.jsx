@@ -1,6 +1,6 @@
 import {Avatar, Button, Card, CardHeader, Typography} from "@material-tailwind/react";
 
-const SongItem = ({song, calcDuration, handleSendSongToRoom}) => {
+const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongToPlaylist=null}) => {
     return (
         <Card
             color="transparent"
@@ -24,14 +24,29 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom}) => {
                         <Typography variant="h5" color="blue-gray">
                             {song.name}
                         </Typography>
-                        <Button
-                            size="sm"
-                            color="green"
-                            variant="gradient"
-                            onClick={(e) => handleSendSongToRoom(e, song.uri)}
-                        >
-                            Send Request
-                        </Button>
+
+                        {typeof handleSendSongToRoom === "function" && (
+                            <Button
+                                size="sm"
+                                color="green"
+                                variant="gradient"
+                                onClick={(e) => handleSendSongToRoom(e, song.uri)}
+                            >
+                                Send Request
+                            </Button>
+                        )}
+
+                        {typeof handleAddSongToPlaylist === "function" && (
+                            <Button
+                                size="sm"
+                                color="green"
+                                variant="gradient"
+                                onClick={(e) => handleAddSongToPlaylist(e, song.id)}
+                            >
+                                Add To Playlist
+                            </Button>
+                        )}
+
                     </div>
                     <Typography color="blue-gray">
                         {song.artist.join(", ")}

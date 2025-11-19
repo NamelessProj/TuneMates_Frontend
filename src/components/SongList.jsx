@@ -1,21 +1,16 @@
 import DefaultSpinner from "./DefaultSpinner.jsx";
 import {Alert, Button} from "@material-tailwind/react";
 import SongItem from "./SongItem.jsx";
+import parseMsToMinutesSeconds from "../utils/parseMsToMinutesSeconds.js";
 
 const SongList = ({songs, hasMore, error, loading, handleLoadMore, handleSendSongToRoom}) => {
-    const durationMsToMinutesSeconds = (durationMs) => {
-        const minutes = Math.floor(durationMs / 60000);
-        const seconds = Math.floor((durationMs % 60000) / 1000);
-        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    }
-
     return (
         <div className="flex flex-col items-center mt-6">
             {songs.length > 0 ? (
                 <div>
                     {songs.map((song, i) => <SongItem
                         song={song}
-                        calcDuration={durationMsToMinutesSeconds}
+                        calcDuration={parseMsToMinutesSeconds}
                         handleSendSongToRoom={handleSendSongToRoom}
                         key={i}
                     />)}

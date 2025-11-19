@@ -8,11 +8,13 @@ import {useRoomStore} from "../stores/roomStore.js";
 import DefaultSpinner from "../components/DefaultSpinner.jsx";
 import OwnerSongList from "../components/OwnerSongList.jsx";
 import {toast} from "react-toastify";
+import {useSpotifyStore} from "../stores/spotifyStore.js";
 
 const RequestedSongs = () => {
     const {roomId} = useParams();
     const {pendingSongs, songError, songLoading, getAllSongsWithStatus} = useSongStore();
     const {room, roomError, roomLoading, getRoomById} = useRoomStore();
+    const {spotifyError, addSongToPlaylist} = useSpotifyStore();
     const {userInfo, userToken} = useAuthStore();
 
     const navigate = useNavigate();
@@ -53,6 +55,19 @@ const RequestedSongs = () => {
         }
     }, [room, roomId, userToken, userInfo, getAllSongsWithStatus]);
 
+    useEffect(() => {
+        if (spotifyError) toast(spotifyError, {type: "error"});
+    }, [spotifyError]);
+
+    const handleAddSongToPlaylist = async (e, songId) => {
+        e.preventDefault();
+        if (!songId || isNaN(songId)) return;
+
+        NProgress.start();
+        await addSongToPlaylist(roomId, songId, userToken);
+        NProgress.done();
+    }
+
     return (
         <>
             {roomLoading ? (
@@ -74,7 +89,10 @@ const RequestedSongs = () => {
                         </div>
                     ) : null}
 
-                    <OwnerSongList songs={pendingSongs} />
+                    <OwnerSongList
+                        songs={pendingSongs}
+                        handleAddSongToPlaylist={handleAddSongToPlaylist}
+                    />
                 </main>
             )}
         </>

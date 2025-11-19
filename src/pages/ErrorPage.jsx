@@ -1,5 +1,6 @@
 import {Typography} from "@material-tailwind/react";
 import {Link} from "react-router-dom";
+import GlitchText from "../components/GlitchText .jsx";
 
 const ErrorPage = () => {
     return (
@@ -7,9 +8,9 @@ const ErrorPage = () => {
             <Typography variant="h2" as="p">
                 Error
             </Typography>
-            <Typography variant="h1" className="text-7xl text-primary-green">
+            <GlitchText>
                 404
-            </Typography>
+            </GlitchText>
             <Typography variant="h2" as="p">
                 Not Found
             </Typography>

@@ -20,17 +20,17 @@ const App = () => {
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="profile" element={<Profile />} />
+                <Route path="room">
+                    <Route path="create" element={<CreateRoom />} />
+                    <Route path="slug/:slug" element={<RoomPage />} />
+                    <Route path="edit/:roomId" element={<EditRoom />} />
+                </Route>
                 <Route path="rooms">
                     <Route index element={<Rooms />} />
-                    <Route path="create" element={<CreateRoom />} />
                 </Route>
                 <Route path="spotify">
                     <Route path="connect" element={<SpotifyConnect />} />
                     <Route path="callback" element={<SpotifyCallback />} />
-                </Route>
-                <Route path="room">
-                    <Route path=":slug" element={<RoomPage />} />
-                    <Route path="edit/:roomId" element={<EditRoom />} />
                 </Route>
                 <Route path="*" element={<ErrorPage />} />
             </Route>

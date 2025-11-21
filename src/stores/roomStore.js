@@ -84,6 +84,24 @@ export const useRoomStore = create((set) => ({
         }
     },
 
+    editRoom: async (data, roomId, token) => {
+        set({roomLoading: true, roomError: null});
+        try {
+            const res = await axios.put(`${baseUrl}/${roomId}`, data,{
+                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                method: "PUT",
+            });
+            set(() => ({room: res.data.room}));
+        } catch (err) {
+            set({roomError: err?.response?.data?.message || err?.message || "Failed to edit the room"});
+        } finally {
+            set({roomLoading: false});
+        }
+    },
+
     deleteRoom: async (id, token) => {
         set({roomLoading: true, roomError: null, deleteSuccess: false});
         try {

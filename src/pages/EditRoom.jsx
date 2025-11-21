@@ -13,8 +13,8 @@ const EditRoom = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!userToken || !userInfo) navigate("/login");
-    }, [userToken, userInfo, navigate]);
+        if (!userToken || !userInfo || isNaN(roomId)) navigate("/login");
+    }, [userToken, userInfo, roomId, navigate]);
 
     useEffect(() => {
         if (userToken) {

@@ -5,9 +5,13 @@ import {useEffect, useState} from "react";
 import PasswordInput from "./PasswordInput.jsx";
 import NProgress from "nprogress";
 import {useNavigate} from "react-router-dom";
+import {useSpotifyStore} from "../stores/spotifyStore.js";
+import {useAuthStore} from "../stores/authStore.js";
+import SelectPlaylistWrapper from "./SelectPlaylistWrapper.jsx";
 
 const CreateRoomForm = ({token}) => {
     const [name, setName] = useState("");
+    const [playlistId, setPlaylistId] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [isActive, setIsActive] = useState(true);
@@ -15,11 +19,21 @@ const CreateRoomForm = ({token}) => {
 
     const navigate = useNavigate();
 
+    const {userInfo, userToken} = useAuthStore();
     const {room, roomError, roomLoading, createRoom} = useRoomStore();
+    const {spotifyError, spotifyLoading, userPlaylists, getUserPlaylist} = useSpotifyStore();
 
     useEffect(() => {
         if (room && !roomError) navigate("/rooms");
     }, [room, roomError, navigate]);
+
+    useEffect(() => {
+        if (!userInfo || !userToken) navigate("/login");
+
+        if (userInfo.spotifyId !== "") {
+            getUserPlaylist(userToken);
+        }
+    }, [userInfo, userToken, navigate, getUserPlaylist]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -101,6 +115,16 @@ const CreateRoomForm = ({token}) => {
                                 onChange={() => setIsActive(!isActive)}
                                 color="green"
                             />
+
+                            <SelectPlaylistWrapper
+                                value={playlistId}
+                                setValue={setPlaylistId}
+                                playlists={userPlaylists}
+                                error={spotifyError}
+                                loading={spotifyLoading}
+                                userInfo={userInfo}
+                            />
+
                             <Button
                                 color="green"
                                 variant="gradient"

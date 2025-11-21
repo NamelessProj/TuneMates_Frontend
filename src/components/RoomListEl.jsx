@@ -1,6 +1,7 @@
 import {Button, Card, Typography} from "@material-tailwind/react";
 import {useRoomStore} from "../stores/roomStore.js";
 import NProgress from "nprogress";
+import {Link} from "react-router-dom";
 
 const RoomListEl = ({room, token}) => {
     const {roomLoading, deleteRoom} = useRoomStore();
@@ -19,7 +20,7 @@ const RoomListEl = ({room, token}) => {
                 <Typography variant="h2">
                     {room.name}
                 </Typography>
-                <div>
+                <div className="flex flex-col flex-grow-1 gap-2">
                     <Button
                         variant="gradient"
                         color="red"
@@ -28,6 +29,15 @@ const RoomListEl = ({room, token}) => {
                     >
                         Delete
                     </Button>
+
+                    <Link to={`/room/edit/${room.id}`}>
+                        <Button
+                            color="green"
+                            variant="gradient"
+                        >
+                            Edit Room
+                        </Button>
+                    </Link>
                 </div>
             </div>
             <Typography variant="small">

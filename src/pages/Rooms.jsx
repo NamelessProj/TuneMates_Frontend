@@ -29,7 +29,7 @@ const Rooms = () => {
                     )}
 
                     {(!userRooms || userRooms.length < 10) && (
-                        <Link to="create">
+                        <Link to="/room/create">
                             <Button variant="gradient" color="green">
                                 Create New Room
                             </Button>

@@ -30,7 +30,7 @@ const RoomListEl = ({room, token}) => {
                         Delete
                     </Button>
 
-                    <Link to={`/room/edit/${room.id}`}>
+                    <Link className="flex-1" to={`/room/edit/${room.id}`}>
                         <Button
                             color="green"
                             variant="gradient"
@@ -39,7 +39,7 @@ const RoomListEl = ({room, token}) => {
                         </Button>
                     </Link>
 
-                    <Link to={`/room/songs/${room.id}`}>
+                    <Link className="flex-1" to={`/room/songs/${room.id}`}>
                         <Button
                             color="green"
                             variant="gradient"

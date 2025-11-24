@@ -35,6 +35,7 @@ const SearchSongs = ({roomId}) => {
                 withCredentials: true,
                 method: "GET"
             });
+            console.log(res.data);
             results = res.data;
         } catch (err) {
             setSongsError(err?.response?.data?.message || err?.message || "Failed to search songs on Spotify");

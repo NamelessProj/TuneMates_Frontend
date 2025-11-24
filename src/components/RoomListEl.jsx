@@ -15,7 +15,7 @@ const RoomListEl = ({room, token}) => {
     }
 
     return (
-        <Card color="blue-gray" className=" mb-3">
+        <Card color="blue-gray" className="p-3 mb-3">
             <div className="grid grid-cols-[1fr-auto] gap-x-3">
                 <Typography variant="h2" className="text-center text-balance">
                     {room.name}

@@ -22,6 +22,8 @@ const RequestedSongs = () => {
     useEffect(() => {
         if (roomId.length === 0 || isNaN(roomId) || !userInfo || !userToken) navigate("/login");
 
+        console.log("Fetching room info for room ID:", roomId);
+
         NProgress.start();
         getRoomById(roomId);
         NProgress.done();
@@ -40,6 +42,7 @@ const RequestedSongs = () => {
 
         const requestPandingSongs = async () => {
             NProgress.start();
+            console.log("Fetching pending songs for room ID:", roomId);
             const pendingStatusCode = 0;
             await getAllSongsWithStatus(roomId, userToken, pendingStatusCode);
             NProgress.done();

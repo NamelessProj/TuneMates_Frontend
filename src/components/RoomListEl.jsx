@@ -15,9 +15,9 @@ const RoomListEl = ({room, token}) => {
     }
 
     return (
-        <Card color="blue-gray" className="w-full w-max-[20rem] mb-3">
+        <Card color="blue-gray" className=" mb-3">
             <div className="grid grid-cols-[1fr-auto] gap-x-3">
-                <Typography variant="h2">
+                <Typography variant="h2" className="text-center text-balance">
                     {room.name}
                 </Typography>
                 <div className="flex flex-col gap-2">
@@ -34,6 +34,7 @@ const RoomListEl = ({room, token}) => {
                         <Button
                             color="green"
                             variant="gradient"
+                            className="w-full"
                         >
                             Edit Room
                         </Button>
@@ -43,6 +44,7 @@ const RoomListEl = ({room, token}) => {
                         <Button
                             color="green"
                             variant="gradient"
+                            className="w-full"
                         >
                             See Requested Songs
                         </Button>
@@ -50,7 +52,7 @@ const RoomListEl = ({room, token}) => {
                 </div>
             </div>
             <Typography variant="small">
-                {room.createdAt}
+                Room Code: {room.slug}
             </Typography>
         </Card>
     );

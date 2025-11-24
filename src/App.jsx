@@ -11,6 +11,7 @@ import SpotifyConnect from "./pages/SpotifyConnect.jsx";
 import SpotifyCallback from "./pages/SpotifyCallback.jsx";
 import RoomPage from "./pages/RoomPage.jsx";
 import EditRoom from "./pages/EditRoom.jsx";
+import RequestedSongs from "./pages/RequestedSongs.jsx";
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path="create" element={<CreateRoom />} />
                     <Route path="slug/:slug" element={<RoomPage />} />
                     <Route path="edit/:roomId" element={<EditRoom />} />
+                    <Route path="songs/:roomId" element={<RequestedSongs />} />
                 </Route>
                 <Route path="rooms">
                     <Route index element={<Rooms />} />

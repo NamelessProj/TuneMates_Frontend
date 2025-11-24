@@ -5,7 +5,7 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
         <Card
             color="transparent"
             shadow={false}
-            className="w-full max-w-[26rem]"
+            className="w-full max-w-[26rem] mb-3"
         >
             <CardHeader
                 color="blue-gray"

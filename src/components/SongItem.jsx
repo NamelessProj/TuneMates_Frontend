@@ -49,7 +49,7 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
 
                     </div>
                     <Typography color="blue-gray">
-                        {song.artist.join(", ")}
+                        {song.artists}
                     </Typography>
                     <Typography variant="small" color="blue-gray">
                         {calcDuration(song.durationMs)}

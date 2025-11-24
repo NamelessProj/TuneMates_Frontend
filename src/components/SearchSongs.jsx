@@ -60,7 +60,7 @@ const SearchSongs = ({roomId}) => {
 
         const songs = await searchSongs(q);
         setSongs(songs.items || []);
-        setHasMore(songs.hasMore || false);
+        setHasMore(songs.hasNext || false);
         setOffset(songs.nextOffset || 0);
 
         setLoading(false);
@@ -85,7 +85,7 @@ const SearchSongs = ({roomId}) => {
 
         const moreSongs = await searchSongs(q);
         setSongs(prevSongs => [...prevSongs, ...(moreSongs.items || [])]);
-        setHasMore(moreSongs.hasMore || false);
+        setHasMore(moreSongs.hasNext || false);
         setOffset(moreSongs.nextOffset || 0);
 
         setLoading(false);

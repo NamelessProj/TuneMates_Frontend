@@ -8,7 +8,7 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
             className="w-full max-w-[26rem] mb-3"
         >
             <CardHeader
-                color="blue-gray"
+                color="transparent"
                 floated={false}
                 shadow={false}
                 className="mx-0 flex items-center gap-4 pt-0 pb-8"

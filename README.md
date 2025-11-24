@@ -9,16 +9,17 @@ This is the frontend repo for TuneMates, a platform that make collaborative musi
 You can find the backend repo [here](https://github.com/NamelessProj/TuneMates_Backend).
 
 ## Routes
-| Route                | Description                                                                      |
-|----------------------|----------------------------------------------------------------------------------|
-| `/`                  | Landing page with app overview and features.                                     |
-| `/login`             | User login page.                                                                 |
-| `/register`          | User registration page.                                                          |
-| `/profile`           | User profile management page.                                                    |
-| `/room/create`       | Creating a new room.                                                             |
-| `/room/slug/:slug`   | Page of the room, way for everyone to request songs for a room.                  |
-| `/room/edit/:roomId` | Editing an existing room (need to be connected ofc).                             |
-| `/rooms`             | List of the user's rooms.                                                        |
-| `/spotify/connect`   | Redirect the user to connect their Spotify account with TuneMates.               |
-| `/spotify/callback`  | Where Spotify redirect you after the connection.                                 |
-| `/*`                 | Get redirected to the error page if you don't get to any of the existing routes. |
+| Route                  | Description                                                                      |
+|------------------------|----------------------------------------------------------------------------------|
+| `/`                    | Landing page with app overview and features.                                     |
+| `/login`               | User login page.                                                                 |
+| `/register`            | User registration page.                                                          |
+| `/profile`             | User profile management page.                                                    |
+| `/room/create`         | Creating a new room.                                                             |
+| `/room/slug/:slug`     | Page of the room, way for everyone to request songs for a room.                  |
+| `/room/edit/:roomId`   | Editing an existing room (need to be connected ofc).                             |
+| `/room/songs/:roomId`  | Getting all the pending songs in a room.                                         |
+| `/rooms`               | List of the user's rooms.                                                        |
+| `/spotify/connect`     | Redirect the user to connect their Spotify account with TuneMates.               |
+| `/spotify/callback`    | Where Spotify redirect you after the connection.                                 |
+| `/*`                   | Get redirected to the error page if you don't get to any of the existing routes. |

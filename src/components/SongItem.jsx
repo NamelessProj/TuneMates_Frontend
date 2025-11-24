@@ -30,7 +30,7 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
                                 size="sm"
                                 color="green"
                                 variant="gradient"
-                                onClick={(e) => handleSendSongToRoom(e, song.uri)}
+                                onClick={(e) => handleSendSongToRoom(e, song.id)}
                             >
                                 Send Request
                             </Button>

@@ -12,7 +12,7 @@ export const useSongStore = create((set) => ({
     sendSongToRoom: async (songId, roomId) => {
         set({songLoading: true, songError: null});
         try {
-            await axios.post(`${baseUrl}/${roomId}/${songId}`,
+            await axios.post(`${baseUrl}/room/${roomId}/${songId}`,
                 null,
                 {
                     withCredentials: true,
@@ -28,7 +28,7 @@ export const useSongStore = create((set) => ({
     getAllSongsWithStatus: async (roomId, token, status=0) => {
         set({songLoading: true, songError: null});
         try {
-            const res = await axios.get(`${baseUrl}/${roomId}/status/${status}`,
+            const res = await axios.get(`${baseUrl}/room/${roomId}/status/${status}`,
                 {
                     withCredentials: true,
                     headers: {

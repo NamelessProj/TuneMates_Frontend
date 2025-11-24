@@ -15,12 +15,12 @@ const RoomListEl = ({room, token}) => {
     }
 
     return (
-        <Card>
+        <Card color="blue-gray" className="w-full w-max-[20rem] mb-3">
             <div className="grid grid-cols-[1fr-auto] gap-x-3">
                 <Typography variant="h2">
                     {room.name}
                 </Typography>
-                <div className="flex flex-col flex-grow-1 gap-2">
+                <div className="flex flex-col gap-2">
                     <Button
                         variant="gradient"
                         color="red"
@@ -36,6 +36,15 @@ const RoomListEl = ({room, token}) => {
                             variant="gradient"
                         >
                             Edit Room
+                        </Button>
+                    </Link>
+
+                    <Link to={`/room/songs/${room.id}`}>
+                        <Button
+                            color="green"
+                            variant="gradient"
+                        >
+                            See Requested Songs
                         </Button>
                     </Link>
                 </div>

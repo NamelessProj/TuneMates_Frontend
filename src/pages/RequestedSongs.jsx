@@ -22,7 +22,7 @@ const RequestedSongs = () => {
     console.log("RequestedSongs component mounted with roomId:", roomId);
 
     useEffect(() => {
-        if (roomId.length === 0 || isNaN(roomId) || !userInfo || !userToken) navigate("/login");
+        if (!roomId || isNaN(roomId) || !userInfo || !userToken) navigate("/login");
 
         console.log("Fetching room info for room ID:", roomId);
 
@@ -40,7 +40,7 @@ const RequestedSongs = () => {
     }, [songError]);
 
     useEffect(() => {
-        if (!room || roomId.length === 0 || isNaN(roomId) || !userInfo || !userToken) return;
+        if (!room || !roomId || isNaN(roomId) || !userInfo || !userToken) return;
 
         const requestPandingSongs = async () => {
             NProgress.start();
@@ -85,7 +85,7 @@ const RequestedSongs = () => {
                         Pending songs for the room
                     </Typography>
                     <Typography variant="h2" className="text-center text-balance">
-                        {room.name}
+                        {room?.name || "Unknown Room"}
                     </Typography>
 
                     {(songLoading && pendingSongs.length > 0) ? (

@@ -5,10 +5,10 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
         <Card
             color="transparent"
             shadow={false}
-            className="w-full max-w-[26rem] bg-gray-500"
+            className="w-full max-w-[26rem]"
         >
             <CardHeader
-                color="transparent"
+                color="blue-gray"
                 floated={false}
                 shadow={false}
                 className="mx-0 flex items-center gap-4 pt-0 pb-8"
@@ -21,7 +21,7 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
                 />
                 <div className="flex w-full flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                        <Typography variant="h5" color="blue-gray">
+                        <Typography variant="h5" color="white">
                             {song.name}
                         </Typography>
 
@@ -48,10 +48,10 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
                         )}
 
                     </div>
-                    <Typography color="blue-gray">
+                    <Typography color="white">
                         {song.artist}
                     </Typography>
-                    <Typography variant="small" color="blue-gray">
+                    <Typography variant="small" color="white">
                         {calcDuration(song.durationMs)}
                     </Typography>
                 </div>

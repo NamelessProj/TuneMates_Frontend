@@ -19,6 +19,8 @@ const RequestedSongs = () => {
 
     const navigate = useNavigate();
 
+    console.log("RequestedSongs component mounted with roomId:", roomId);
+
     useEffect(() => {
         if (roomId.length === 0 || isNaN(roomId) || !userInfo || !userToken) navigate("/login");
 

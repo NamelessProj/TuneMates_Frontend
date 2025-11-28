@@ -1,4 +1,5 @@
 import {Avatar, Button, Card, CardHeader, Typography} from "@material-tailwind/react";
+import {format} from "date-fns";
 
 const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongToPlaylist=null}) => {
     return (
@@ -54,6 +55,11 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
                     <Typography variant="small" color="white">
                         {calcDuration(song.durationMs)}
                     </Typography>
+                    {song?.addedAt ? (
+                        <Typography variant="small" color="white">
+                            Requested: {format(song.addedAt, "eeee dd MMM yyyy 'at' kk:mm")}
+                        </Typography>
+                    ) : null}
                 </div>
             </CardHeader>
         </Card>

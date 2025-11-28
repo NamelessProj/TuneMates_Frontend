@@ -1,7 +1,9 @@
-import {Button, Card, Typography} from "@material-tailwind/react";
+import {Button, Card, CardHeader, Typography} from "@material-tailwind/react";
 import {useRoomStore} from "../stores/roomStore.js";
 import NProgress from "nprogress";
 import {Link} from "react-router-dom";
+import {format} from "date-fns";
+import DefaultSpinner from "./DefaultSpinner.jsx";
 
 const RoomListEl = ({room, token}) => {
     const {roomLoading, deleteRoom} = useRoomStore();
@@ -15,45 +17,52 @@ const RoomListEl = ({room, token}) => {
     }
 
     return (
-        <Card color="blue-gray" className="p-3 mb-3">
-            <div className="grid grid-cols-[1fr-auto] gap-x-3">
-                <Typography variant="h2" className="text-center text-balance">
-                    {room.name}
-                </Typography>
-                <div className="flex flex-col gap-2">
-                    <Button
-                        variant="gradient"
-                        color="red"
-                        disabled={roomLoading}
-                        onClick={handleDelete}
-                    >
-                        Delete
-                    </Button>
+        <Card
+            color="transparent"
+            shadow={false}
+            className="w-full max-w-[26rem] mb-3"
+        >
+            <CardHeader
+                color="transparent"
+                floated={false}
+                shadow={false}
+                className="mx-0 flex items-center gap-4 pt-0 pb-8"
+            >
+                <div className="flex w-full flex-col gap-0.5">
+                    <div className="flex items-center justify-between">
+                        <Typography variant="h3" color="white">
+                            {room.name}
+                        </Typography>
 
-                    <Link className="flex-1" to={`/room/edit/${room.id}`}>
-                        <Button
-                            color="green"
-                            variant="gradient"
-                            className="w-full"
-                        >
-                            Edit Room
-                        </Button>
-                    </Link>
+                        <div className="flex flex-col justify-center items-center gap-2">
+                            <Link className="flex-1" to={`/room/edit/${room.id}`}>
+                                <Button
+                                    color="green"
+                                    variant="gradient"
+                                    className="w-full"
+                                >
+                                    Edit Room
+                                </Button>
+                            </Link>
 
-                    <Link className="flex-1" to={`/room/songs/${room.id}`}>
-                        <Button
-                            color="green"
-                            variant="gradient"
-                            className="w-full"
-                        >
-                            See Requested Songs
-                        </Button>
-                    </Link>
+                            <Button
+                                variant="gradient"
+                                color="red"
+                                disabled={roomLoading}
+                                onClick={handleDelete}
+                            >
+                                {roomLoading ? <DefaultSpinner color="red" /> : "Delete"}
+                            </Button>
+                        </div>
+                    </div>
+                    <Typography color="white">
+                        Slug: {room.slug}
+                    </Typography>
+                    <Typography variant="small" color="white">
+                        Updated: {room?.lastUpdate ? format(room.lastUpdate, "eeee dd MMM yyyy 'at' kk:mm") : "unknown"}
+                    </Typography>
                 </div>
-            </div>
-            <Typography variant="small">
-                Room Code: {room.slug}
-            </Typography>
+            </CardHeader>
         </Card>
     );
 };

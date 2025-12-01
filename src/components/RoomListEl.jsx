@@ -20,7 +20,7 @@ const RoomListEl = ({room, token}) => {
         <Card
             color="transparent"
             shadow={false}
-            className="w-full max-w-[26rem] mb-3"
+            className="w-full max-w-[26rem]"
         >
             <CardHeader
                 color="transparent"

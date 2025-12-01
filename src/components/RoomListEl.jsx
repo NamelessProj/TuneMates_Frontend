@@ -45,11 +45,22 @@ const RoomListEl = ({room, token}) => {
                                 </Button>
                             </Link>
 
+                            <Link className="flex-1" to={`/room/songs/${room.id}`}>
+                                <Button
+                                    color="blue"
+                                    variant="gradient"
+                                    className="w-full"
+                                >
+                                    Requested Songs
+                                </Button>
+                            </Link>
+
                             <Button
                                 variant="gradient"
                                 color="red"
                                 disabled={roomLoading}
                                 onClick={handleDelete}
+                                className="w-full"
                             >
                                 {roomLoading ? <DefaultSpinner color="red" /> : "Delete"}
                             </Button>

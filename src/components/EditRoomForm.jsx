@@ -37,8 +37,8 @@ const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
     }
 
     return (
-        <div>
-            <form className="flex flex-col gap-6 flex-1" onSubmit={handleSubmit}>
+        <div className="w-full flex justify-center items-center">
+            <form className="max-w-[26rem] flex flex-col gap-6 flex-1" onSubmit={handleSubmit}>
                 {roomError ? (
                     <div className="flex justify-center items-center w-full">
                         <Alert color="red">

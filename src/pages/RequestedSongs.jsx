@@ -22,6 +22,7 @@ const RequestedSongs = () => {
     console.log("RequestedSongs component mounted with roomId:", roomId);
 
     useEffect(() => {
+        console.log("RequestedSongs useEffect triggered with roomId:", roomId, "userInfo:", userInfo, "userToken:", userToken);
         if (!roomId || isNaN(roomId) || !userInfo || !userToken) navigate("/login");
 
         console.log("Fetching room info for room ID:", roomId);

@@ -42,6 +42,9 @@ const RequestedSongs = () => {
             NProgress.done();
         }
 
+        // Initial fetch
+        requestPendingSongs().then();
+
         const interval = 15_000; // 15 seconds
         const intervalFunc = setInterval(() => {
             requestPendingSongs().then();

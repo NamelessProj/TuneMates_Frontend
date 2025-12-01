@@ -29,9 +29,9 @@ const RequestedSongs = () => {
         NProgress.done();
     }, [roomId, userInfo, userToken, navigate, getRoomById]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (roomError) navigate("/");
-    }, [roomError, navigate]);
+    }, [roomError, navigate]);*/
 
     useEffect(() => {
         if (songError) toast(songError);

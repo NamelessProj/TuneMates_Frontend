@@ -3,7 +3,7 @@ import {Alert, Button, Input} from "@material-tailwind/react";
 const SearchSongsForm = ({input, setInput, error, handleSearch}) => {
     return (
         <div>
-            {error && <Alert color="red" className="mx-auto">{error}</Alert>}
+            {error && <Alert color="red" className="w-fit mx-auto my-3">{error}</Alert>}
             <form
                 className="flex flex-col md:flex-row gap-4 md:items-end md:gap-2"
                 onSubmit={handleSearch}

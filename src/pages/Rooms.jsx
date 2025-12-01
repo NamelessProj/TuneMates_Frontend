@@ -21,7 +21,7 @@ const Rooms = () => {
     return (
         <main className="flex justify-center items-center">
             {roomLoading ? <DefaultSpinner/> : (
-                <div className="flex flex-col justify-center items-center gap-6">
+                <div className=" w-full flex flex-col justify-center items-center gap-6">
                     {roomError && (
                         <Alert color="red">
                             {roomError}

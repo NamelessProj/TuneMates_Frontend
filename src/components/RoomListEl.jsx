@@ -35,7 +35,7 @@ const RoomListEl = ({room, token}) => {
                         </Typography>
 
                         <div className="flex flex-col justify-center items-center gap-2">
-                            <Link className="flex-1" to={`/room/edit/${room.id}`}>
+                            <Link className=" w-full flex-1" to={`/room/edit/${room.id}`}>
                                 <Button
                                     color="green"
                                     variant="gradient"
@@ -45,7 +45,7 @@ const RoomListEl = ({room, token}) => {
                                 </Button>
                             </Link>
 
-                            <Link className="flex-1" to={`/room/songs/${room.id}`}>
+                            <Link className="w-full flex-1" to={`/room/songs/${room.id}`}>
                                 <Button
                                     color="blue"
                                     variant="gradient"

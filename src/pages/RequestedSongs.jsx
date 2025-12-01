@@ -13,7 +13,7 @@ import {useSpotifyStore} from "../stores/spotifyStore.js";
 const RequestedSongs = () => {
     const {roomId} = useParams();
     const {pendingSongs, songError, songLoading, getAllSongsWithStatus} = useSongStore();
-    const {room, roomError, roomLoading, getRoomById} = useRoomStore();
+    const {room, roomLoading, getRoomById} = useRoomStore();
     const {spotifyError, addSongToPlaylist} = useSpotifyStore();
     const {userInfo, userToken} = useAuthStore();
 
@@ -22,16 +22,10 @@ const RequestedSongs = () => {
     useEffect(() => {
         if (!roomId || isNaN(roomId) || !userInfo || !userToken) navigate("/login");
 
-        console.log("Fetching room info for room ID:", roomId);
-
         NProgress.start();
         getRoomById(roomId);
         NProgress.done();
     }, [roomId, userInfo, userToken, navigate, getRoomById]);
-
-    /*useEffect(() => {
-        if (roomError) navigate("/");
-    }, [roomError, navigate]);*/
 
     useEffect(() => {
         if (songError) toast(songError);
@@ -40,7 +34,7 @@ const RequestedSongs = () => {
     useEffect(() => {
         if (!room || !roomId || isNaN(roomId) || !userInfo || !userToken) return;
 
-        const requestPandingSongs = async () => {
+        const requestPendingSongs = async () => {
             NProgress.start();
             console.log("Fetching pending songs for room ID:", roomId);
             const pendingStatusCode = 0;
@@ -50,7 +44,7 @@ const RequestedSongs = () => {
 
         const interval = 15_000; // 15 seconds
         const intervalFunc = setInterval(() => {
-            requestPandingSongs();
+            requestPendingSongs().then();
         }, interval);
 
         return () => {

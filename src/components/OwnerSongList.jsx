@@ -4,7 +4,7 @@ import {Typography} from "@material-tailwind/react";
 
 const OwnerSongList = ({songs, handleAddSongToPlaylist}) => {
     return (
-        <div className="my-6">
+        <div className="flex flex-col justify-center items-center my-6">
             {songs.length > 0 ? (
                 songs.map((song, i) => <SongItem
                     key={i}

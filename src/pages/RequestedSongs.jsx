@@ -23,7 +23,7 @@ const RequestedSongs = () => {
         if (!roomId || isNaN(roomId) || !userInfo || !userToken) navigate("/login");
 
         NProgress.start();
-        getRoomById(roomId);
+        getRoomById(roomId, userToken);
         NProgress.done();
     }, [roomId, userInfo, userToken, navigate, getRoomById]);
 

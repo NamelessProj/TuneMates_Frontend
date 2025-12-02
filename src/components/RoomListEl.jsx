@@ -29,7 +29,7 @@ const RoomListEl = ({room, token}) => {
                     shadow={false}
                     className="mx-0 flex items-center gap-4 pt-0 pb-8"
                 >
-                    <div className="flex w-full flex-col gap-0.5 p-3">
+                    <div className="flex w-full flex-col gap-0.5 px-4">
                         <div className="flex items-center justify-between">
                             <Typography variant="h3" color="white">
                                 {room.name}

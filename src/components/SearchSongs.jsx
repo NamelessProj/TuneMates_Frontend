@@ -7,6 +7,7 @@ import {useSongStore} from "../stores/songStore.js";
 import {toast} from "react-toastify";
 
 const SearchSongs = ({roomId}) => {
+    const [previousSearch, setPreviousSearch] = useState("");
     const [input, setInput] = useState("");
     const [error, setError] = useState("");
     const [offset, setOffset] = useState(0);
@@ -50,8 +51,13 @@ const SearchSongs = ({roomId}) => {
         setError("");
 
         const q = input.trim();
-        if (q.length === 0) {
+        if (q === "") {
             setError("Please enter a search term.");
+            return;
+        }
+
+        if (q === previousSearch) {
+            setError("You have already searched for this term.");
             return;
         }
 
@@ -61,6 +67,7 @@ const SearchSongs = ({roomId}) => {
         setSongs(songs.items || []);
         setHasMore(songs.hasNext || false);
         setOffset(songs.nextOffset || 0);
+        setPreviousSearch(q);
 
         setLoading(false);
     }
@@ -75,7 +82,7 @@ const SearchSongs = ({roomId}) => {
         }
 
         const q = input.trim();
-        if (q.length === 0) {
+        if (q === "") {
             setSongsError("Please enter a search term.");
             return;
         }

@@ -17,7 +17,7 @@ const RoomListEl = ({room, token}) => {
     }
 
     return (
-        <Badge color={room.isActive ? "green" : "red"}>
+        <Badge placement="top-start" color={room.isActive ? "green" : "red"}>
             <Card
                 color="transparent"
                 shadow={false}

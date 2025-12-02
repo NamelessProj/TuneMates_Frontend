@@ -17,13 +17,13 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
                 <Avatar
                     size="lg"
                     variant="rounded"
-                    src={song.albumImageUrl}
-                    alt={song.name}
+                    src={song?.albumImageUrl ?? song?.albumArtUrl ?? "/default_song.png"}
+                    alt={song?.name ?? song?.title ?? "Unknown Title"}
                 />
                 <div className="flex w-full flex-col gap-0.5">
                     <div className="flex items-center justify-between">
                         <Typography variant="h5" color="white">
-                            {song.name}
+                            {song?.name ?? song?.title ?? "Unknown Title"}
                         </Typography>
 
                         {typeof handleSendSongToRoom === "function" && (

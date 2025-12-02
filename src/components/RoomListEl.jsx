@@ -17,11 +17,11 @@ const RoomListEl = ({room, token}) => {
     }
 
     return (
-        <Badge className="w-full max-w-[26rem]" color={room.isActive ? "green" : "red"}>
+        <Badge color={room.isActive ? "green" : "red"}>
             <Card
                 color="transparent"
                 shadow={false}
-                className="w-full bg-gray-500 bg-opacity-20"
+                className="w-full min-w-[15rem] max-w-[26rem] bg-gray-500 bg-opacity-20"
             >
                 <CardHeader
                     color="transparent"

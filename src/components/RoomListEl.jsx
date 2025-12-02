@@ -21,7 +21,7 @@ const RoomListEl = ({room, token}) => {
             <Card
                 color="transparent"
                 shadow={false}
-                className="w-full min-w-[15rem] max-w-[26rem] bg-gray-500 bg-opacity-20"
+                className="w-full min-w-[19rem] max-w-[26rem] bg-gray-500 bg-opacity-20"
             >
                 <CardHeader
                     color="transparent"
@@ -29,7 +29,7 @@ const RoomListEl = ({room, token}) => {
                     shadow={false}
                     className="mx-0 flex items-center gap-4 pt-0 pb-8"
                 >
-                    <div className="flex w-full flex-col gap-0.5">
+                    <div className="flex w-full flex-col gap-0.5 p-3">
                         <div className="flex items-center justify-between">
                             <Typography variant="h3" color="white">
                                 {room.name}

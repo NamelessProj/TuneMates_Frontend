@@ -13,6 +13,14 @@ const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
     const {spotifyError, spotifyLoading, userPlaylists, getUserPlaylist} = useSpotifyStore();
 
     useEffect(() => {
+        if (room) {
+            setName(room.name);
+            setIsActive(room.isActive);
+            setPlaylistId(room.playlistId || "");
+        }
+    }, [room]);
+
+    useEffect(() => {
         if (userInfo && userToken && userInfo.spotifyId !== "") {
             getUserPlaylist(userToken);
         }

@@ -60,7 +60,7 @@ Since all the routes of the frontend are prefixed with `/api`, make sure to add 
 
 ## Hosting
 Since Spotify requires a secure connection (HTTPS) for OAuth authentication, the frontend is hosted on Vercel to ensure that all communications are secure.
-You can visit the live application [here](tune-mates-frontend.vercel.app).
+You can visit the live application [here](https://tune-mates-frontend.vercel.app/).
 
 So make sure to configure your backend to accept requests from this domain.
 

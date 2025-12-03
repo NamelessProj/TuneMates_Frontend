@@ -26,3 +26,42 @@ You can find all the routes available in the application in the table below or [
 | `/spotify/connect`     | Redirect the user to connect their Spotify account with TuneMates.                                           |
 | `/spotify/callback`    | Where Spotify redirect you after the connection.                                                             |
 | `/*`                   | Get redirected to the error page if you don't get to any of the existing routes.                             |
+
+## Installation
+1. Clone the repository:
+2. Navigate to the project directory:
+   ```bash
+   cd TuneMates_Frontend
+   ```
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+4. Create a `.env` file in the root directory and add the necessary environment variables (see below).
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+6. Open your browser and navigate to `http://localhost:5173` to view the application.
+
+## Environment Variables
+Create a `.env` file in the root directory of the project and add the following environment variables:
+```env
+VITE_API_URL=https://localhost:7016/api
+```
+Since all the routes of the frontend are prefixed with `/api`, make sure to add this prefix to the `VITE_API_URL` variable.
+
+## Technologies Used
+- React.js
+- Vite.js
+- Axios
+- React Router
+- Tailwind CSS
+
+## Hosting
+Since Spotify requires a secure connection (HTTPS) for OAuth authentication, the frontend is hosted on Vercel to ensure that all communications are secure.
+You can visit the live application [here](tune-mates-frontend.vercel.app).
+
+So make sure to configure your backend to accept requests from this domain.
+
+And if you want to deploy your own version of the frontend, make sure to configure your Spotify app to include your deployment domain in the Redirect URIs.

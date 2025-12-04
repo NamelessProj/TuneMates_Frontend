@@ -1,4 +1,5 @@
-import {Alert, Button, Input} from "@material-tailwind/react";
+import {Alert, Button, Input, Typography} from "@material-tailwind/react";
+import {Link} from "react-router-dom";
 
 const SearchSongsForm = ({input, setInput, error, handleSearch}) => {
     return (
@@ -25,6 +26,10 @@ const SearchSongsForm = ({input, setInput, error, handleSearch}) => {
                     Search
                 </Button>
             </form>
+
+            <Typography className="text-center text-balance">
+                Sending a song using a Spotify URL or URI? <Link to="url" className="text-green-500 underline">Click here</Link>.
+            </Typography>
         </div>
     );
 };

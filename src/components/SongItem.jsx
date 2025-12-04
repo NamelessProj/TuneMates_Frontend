@@ -53,10 +53,10 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
 
                     </div>
                     <Typography color="white">
-                        {song.artist}
+                        {song?.artist || "Unknown Artist"}
                     </Typography>
                     <Typography variant="small" color="white">
-                        {calcDuration(song.durationMs)}
+                        {calcDuration(song?.durationMs || 0)}
                     </Typography>
                     {song?.addedAt ? (
                         <Typography variant="small" color="white">

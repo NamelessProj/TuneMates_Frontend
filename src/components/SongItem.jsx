@@ -1,4 +1,4 @@
-import {Avatar, Button, Card, CardHeader, Typography} from "@material-tailwind/react";
+import {Avatar, Button, Card, CardHeader, Chip, Typography} from "@material-tailwind/react";
 import {format} from "date-fns";
 
 const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongToPlaylist=null}) => {
@@ -22,9 +22,12 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
                 />
                 <div className="flex w-full flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                        <Typography variant="h5" color="white">
-                            {song?.name ?? song?.title ?? "Unknown Title"}
-                        </Typography>
+                        <div className="flex items-center gap-2">
+                            {song?.explicit && <Chip variant="ghost" value="E" />}
+                            <Typography variant="h5" color="white">
+                                {song?.name ?? song?.title ?? "Unknown Title"}
+                            </Typography>
+                        </div>
 
                         {typeof handleSendSongToRoom === "function" && (
                             <Button

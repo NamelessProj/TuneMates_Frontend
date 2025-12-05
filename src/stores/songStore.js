@@ -9,27 +9,11 @@ export const useSongStore = create((set) => ({
     songLoading: false,
     songError: null,
 
-    sendSongToRoom: async (songId, roomId) => {
+    sendSongToRoom: async (roomId, songId=null, songUri="") => {
         set({songLoading: true, songError: null});
         try {
-            await axios.post(`${baseUrl}/room/${roomId}/id/${songId}`,
-                null,
-                {
-                    withCredentials: true,
-                    method: "POST",
-                });
-        } catch (err) {
-            set({songError: err?.response?.data?.message || err?.message || "Failed to send song to room"});
-        } finally {
-            set({songLoading: false});
-        }
-    },
-
-    sendSongToRoomUsingUrlOrUri: async (songUrl, roomId) => {
-        set({songLoading: true, songError: null});
-        try {
-            await axios.post(`${baseUrl}/room/${roomId}/url`,
-                {uri: songUrl},
+            await axios.post(`${baseUrl}/room/${roomId}/${songId || ""}`,
+                {uri: songUri},
                 {
                     withCredentials: true,
                     method: "POST",

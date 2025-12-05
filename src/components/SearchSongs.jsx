@@ -101,7 +101,7 @@ const SearchSongs = ({roomId}) => {
         e.preventDefault();
 
         NProgress.start();
-        await sendSongToRoom(songId, roomId);
+        await sendSongToRoom(roomId, songId);
         toast("Requested song successfully!", {type: "success"});
         NProgress.done();
     }

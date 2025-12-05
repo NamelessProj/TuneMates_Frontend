@@ -11,7 +11,7 @@ const SendSongViaUrl = () => {
     const [input, setInput] = useState("");
     const [error, setError] = useState("");
 
-    const {songLoading, songError, sendSongToRoomUsingUrlOrUri} = useSongStore();
+    const {songLoading, songError, sendSongToRoom} = useSongStore();
     const {slug} = useParams();
     const {room} = useRoomStore();
 
@@ -22,14 +22,14 @@ const SendSongViaUrl = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const q = input.trim();
-        if (q === "") {
+        const uri = input.trim();
+        if (uri === "") {
             setError("Please enter a song URL or URI.");
             return;
         }
 
         NProgress.start();
-        await sendSongToRoomUsingUrlOrUri(q, room.id);
+        await sendSongToRoom(room.id, null, uri);
         NProgress.done();
     }
 

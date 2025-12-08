@@ -4,7 +4,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useRoomStore} from "../stores/roomStore.js";
 import NProgress from "nprogress";
 import {Alert, Button, Input, Typography} from "@material-tailwind/react";
-import DefaultSpinner from "../components/DefaultSpinner.jsx";
 
 const SendSongViaUrl = () => {
     const navigate = useNavigate();
@@ -65,7 +64,7 @@ const SendSongViaUrl = () => {
                             onClick={handleSubmit}
                             className="rounded-bl-none rounded-tl-none"
                         >
-                            {songLoading ? <DefaultSpinner /> : "Send Song"}
+                            {songLoading ? "Loading" : "Send Song"}
                         </Button>
                     </form>
                 </main>

@@ -55,7 +55,7 @@ const SendSongViaUrl = () => {
                             onChange={(e) => setInput(e.target.value)}
                             label="Song URL or URI"
                             disabled={songLoading}
-                            className="rounded-b-none rounded-tr-none"
+                            className="rounded-br-none rounded-tr-none"
                         />
                         <Button
                             type="submit"

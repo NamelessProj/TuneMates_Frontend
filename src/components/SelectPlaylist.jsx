@@ -16,7 +16,7 @@ const SelectPlaylist = ({playlists, value, setValue}) => {
                         className="flex items-center gap-2"
                     >
                         <Avatar
-                            src={playlist?.imageUrl || "/default_song.png"}
+                            src={playlist?.images[0]?.url || "/default_song.png"}
                             alt={playlist?.name || "Playlist Image"}
                             variant="rounded"
                             className="h-6 w-6 object-cover"

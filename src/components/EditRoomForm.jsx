@@ -43,7 +43,7 @@ const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
         await editRoom({
             name: n,
             isActive: isActive,
-            playlistId: playlistId,
+            spotifyPlaylistId: playlistId,
         }, room.id, userToken);
         NProgress.done();
     }

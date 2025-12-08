@@ -86,7 +86,7 @@ export const useUserStore = create((set) => ({
     connectUserToSpotify: async (code, state, token) => {
         set({userLoading: true, userError: null});
         try{
-            const res = await axios.post(`${baseUrl}/spotify/connect/${code}/${state}`,
+            const res = await axios.post(`${baseUrl}/connect/spotify/${code}/${state}`,
                 null,
                 {
                     withCredentials: true,

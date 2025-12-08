@@ -23,7 +23,7 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
                 <div className="flex w-full flex-col gap-0.5">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                            {song?.explicit && <Chip variant="ghost" value="E" />}
+                            {song?.explicit && <Chip variant="ghost" color="red" value="E" />}
                             <Typography variant="h5" color="white">
                                 {song?.name ?? song?.title ?? "Unknown Title"}
                             </Typography>

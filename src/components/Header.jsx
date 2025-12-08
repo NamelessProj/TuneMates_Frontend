@@ -3,6 +3,7 @@ import {useAuthStore} from "../stores/authStore.js";
 import NProgress from "nprogress";
 import {useEffect} from "react";
 import {Link} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const Header = () => {
     const {userInfo, userToken, userTokenExpiresAt, logout} = useAuthStore();
@@ -14,7 +15,7 @@ const Header = () => {
             NProgress.start();
             logout();
         }catch(err){
-            console.error("Logout failed:", err);
+            toast("Failed to logout: " + err.message, {type: "error"});
         }finally{
             NProgress.done();
         }

@@ -9,7 +9,7 @@ const SelectPlaylist = ({playlists, value, setValue}) => {
                 onChange={(e) => setValue(e.target.value)}
                 label="Select Playlist"
             >
-                {playlists.map((playlist, i) => (
+                {(playlists || []).map((playlist, i) => (
                     <Option
                         value={playlist.id}
                         key={i}

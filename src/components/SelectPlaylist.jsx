@@ -6,7 +6,7 @@ const SelectPlaylist = ({playlists, value, setValue}) => {
             <Select
                 size="lg"
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(val) => setValue(val)}
                 label="Select Playlist"
             >
                 {(playlists || []).map((playlist, i) => (
@@ -19,9 +19,9 @@ const SelectPlaylist = ({playlists, value, setValue}) => {
                             src={playlist?.imageUrl || "/default_song.png"}
                             alt={playlist?.name || "Playlist Image"}
                             variant="rounded"
-                            className="h-5 w-5 object-cover"
+                            className="h-6 w-6 object-cover"
                         />
-                        {playlist?.name || "Unnamed Playlist"} {playlist?.id || "ID"}
+                        {playlist?.name || "Unnamed Playlist"}
                     </Option>
                 ))}
             </Select>

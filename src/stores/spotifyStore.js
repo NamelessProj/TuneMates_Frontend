@@ -55,6 +55,7 @@ export const useSpotifyStore = create((set) => ({
                     method: "GET"
                 });
             set(() => ({userPlaylists: res.data.items}));
+            console.log(res.data.items);
         } catch (err) {
             set({spotifyError: err?.response?.data?.message || err?.message || "Failed to load user playlists"});
         } finally {

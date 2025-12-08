@@ -36,7 +36,6 @@ const RequestedSongs = () => {
 
         const requestPendingSongs = async () => {
             NProgress.start();
-            console.log("Fetching pending songs for room ID:", roomId);
             const pendingStatusCode = 0;
             await getAllSongsWithStatus(roomId, userToken, pendingStatusCode);
             NProgress.done();

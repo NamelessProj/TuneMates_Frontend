@@ -18,6 +18,7 @@ const SelectPlaylist = ({playlists, value, setValue}) => {
                         <Avatar
                             src={playlist?.imageUrl || "/default_song.png"}
                             alt={playlist?.name || "Playlist Image"}
+                            loading="lazy"
                             variant="rounded"
                             className="h-6 w-6 object-cover"
                         />

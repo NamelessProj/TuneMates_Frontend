@@ -37,7 +37,6 @@ export const useSongStore = create((set) => ({
                     method: "GET",
                 });
             set(() => ({pendingSongs: res.data}));
-            console.log(res.data);
         } catch (err) {
             set({songError: err?.response?.data?.message || err?.message || "Failed to get songs from room"});
         } finally {

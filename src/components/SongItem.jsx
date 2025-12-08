@@ -19,6 +19,7 @@ const SongItem = ({song, calcDuration, handleSendSongToRoom=null, handleAddSongT
                     variant="rounded"
                     src={song?.albumImageUrl ?? song?.albumArtUrl ?? "/default_song.png"}
                     alt={song?.name ?? song?.title ?? "Unknown Title"}
+                    loading="lazy"
                 />
                 <div className="flex w-full flex-col gap-0.5">
                     <div className="flex items-center justify-between">

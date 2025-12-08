@@ -49,7 +49,7 @@ const SendSongViaUrl = () => {
                     {songError && <Alert color="red">{songError}</Alert>}
                     {error && <Alert color="red">{error}</Alert>}
 
-                    <form className="flex flex-col md:flex-row gap-4 md:items-end md:gap-2" onSubmit={handleSubmit}>
+                    <form className="flex flex-col md:flex-row gap-4 md:items-end md:gap-2 w-full max-w-[26rem]" onSubmit={handleSubmit}>
                         <Input
                             value={input}
                             onChange={(e) => setInput(e.target.value)}

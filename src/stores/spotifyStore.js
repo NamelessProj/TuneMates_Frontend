@@ -38,6 +38,7 @@ export const useSpotifyStore = create((set) => ({
                 });
         } catch (err) {
             set({spotifyError: err?.response?.data?.message || err?.message || "Failed to add the song to the playlist"});
+            console.log(err);
         } finally {
             set({spotifyLoading: false});
         }

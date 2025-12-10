@@ -25,6 +25,11 @@ const SearchSongs = ({roomId}) => {
 
     const baseUrl = `${import.meta.env.VITE_API_URL}/spotify`;
 
+    /**
+     * Searches for songs on Spotify based on the query.
+     * @param q {string} q - The search query.
+     * @returns {Promise<*>} A promise that resolves to the search results.
+     */
     const searchSongs = async (q) => {
         setSongsError("");
         const market = 'US';
@@ -46,6 +51,11 @@ const SearchSongs = ({roomId}) => {
         return results;
     }
 
+    /**
+     * Handles the form submission to search for songs.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the search is complete.
+     */
     const handleSearch = async (e) => {
         e.preventDefault();
         setError("");
@@ -72,6 +82,11 @@ const SearchSongs = ({roomId}) => {
         setLoading(false);
     }
 
+    /**
+     * Handles loading more songs when the user requests it.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when more songs are loaded.
+     */
     const handleLoadMore = async (e) => {
         e.preventDefault();
         setSongsError("");
@@ -97,6 +112,12 @@ const SearchSongs = ({roomId}) => {
         setLoading(false);
     }
 
+    /**
+     * Handles sending a song to the room.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @param songId {string} songId - The Spotify ID of the song to send.
+     * @returns {Promise<void>} A promise that resolves when the song is sent.
+     */
     const handleSendSongToRoom = async (e, songId) => {
         e.preventDefault();
 

@@ -8,6 +8,11 @@ import {toast} from "react-toastify";
 const Header = () => {
     const {userInfo, userToken, userTokenExpiresAt, logout} = useAuthStore();
 
+    /**
+     * Handles the logout process when the user clicks the logout button.
+     * @param e {Event} e - The click event.
+     * @return {void}
+     */
     const handleLogout = (e) => {
         e.preventDefault();
 

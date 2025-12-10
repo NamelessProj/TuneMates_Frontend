@@ -21,6 +21,15 @@ export const useRoomStore = create((set) => ({
     deleteSuccess: false,
 
     /**
+     * Deletes the current room from cookies.
+     * @returns {void}
+     */
+    deleteCurrentRoomFromCookies: () => {
+        Cookies.delete(roomKey);
+        set(() => ({currentRoom: null}));
+    },
+
+    /**
      * Fetches a room by its slug. You must provide the correct password to access the room.
      * @param slug {string} The slug of the room to fetch
      * @param password {string} The password for the room

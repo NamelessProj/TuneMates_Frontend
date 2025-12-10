@@ -1,10 +1,20 @@
 import {create} from "zustand";
 import axios from "axios";
+import Cookies from "../utils/cookies.js";
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/rooms`;
+const roomKey = 'TuneMatesCurrentRoom';
 
 export const useRoomStore = create((set) => ({
     room: null,
+    currentRoom: (() => {
+        try {
+            const c = Cookies.get(roomKey);
+            return c ? JSON.parse(c) : null;
+        } catch {
+            return null;
+        }
+    })(),
     userRooms: null,
     roomLoading: false,
     roomError: null,
@@ -21,7 +31,8 @@ export const useRoomStore = create((set) => ({
                     withCredentials: true,
                     method: "POST",
                 });
-            set(() => ({room: res.data.room}));
+            set(() => ({currentRoom: res.data.room}));
+            Cookies.set(roomKey, JSON.stringify(res.data.room));
         } catch (err) {
             set({room: null, roomError: err?.response?.data?.message || err?.message || "Failed to load room"});
         } finally {

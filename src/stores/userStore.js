@@ -9,6 +9,11 @@ export const useUserStore = create((set) => ({
     userLoading: false,
     userError: null,
 
+    /**
+     * Registers a new user with the provided data.
+     * @param data {object} The registration data
+     * @returns {Promise<void>} A promise that resolves when the user is registered
+     */
     register: async (data) => {
         set({userLoading: true, userError: null});
         try{
@@ -26,6 +31,11 @@ export const useUserStore = create((set) => ({
         }
     },
 
+    /**
+     * Logs in a user with the provided data.
+     * @param data {object} The login data
+     * @returns {Promise<void>} A promise that resolves when the user is logged in
+     */
     login: async (data) => {
         set({userLoading: true, userError: null});
         try{
@@ -43,6 +53,12 @@ export const useUserStore = create((set) => ({
         }
     },
 
+    /**
+     * Edits the authenticated user's information.
+     * @param data {object} The new user data
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the user is edited
+     */
     editUser: async (data, token) => {
         set({userLoading: true, userError: null});
         try{
@@ -63,6 +79,12 @@ export const useUserStore = create((set) => ({
         }
     },
 
+    /**
+     * Edits the authenticated user's password.
+     * @param data {object} The password data (current and new password)
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the password is edited
+     */
     editUserPassword: async (data, token) => {
         set({userLoading: true, userError: null});
         try{
@@ -83,6 +105,13 @@ export const useUserStore = create((set) => ({
         }
     },
 
+    /**
+     * Connects the authenticated user's account to Spotify.
+     * @param code {string} The Spotify authorization code
+     * @param state {string} The Spotify state parameter to prevent CSRF attacks
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the user is connected to Spotify
+     */
     connectUserToSpotify: async (code, state, token) => {
         set({userLoading: true, userError: null});
         try{
@@ -103,6 +132,12 @@ export const useUserStore = create((set) => ({
         }
     },
 
+    /**
+     * Deletes the authenticated user's account.
+     * @param password {string} The user's current password for verification
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the user is deleted
+     */
     deleteUser: async (password, token) => {
         set({userLoading: true, userError: null});
         try{

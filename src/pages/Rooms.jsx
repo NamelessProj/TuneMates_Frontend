@@ -36,7 +36,9 @@ const Rooms = () => {
                         </Link>
                     )}
 
-                    <RoomList rooms={userRooms} token={userToken} />
+                    <div className="w-full max-w-[60rem] mx-auto">
+                        <RoomList rooms={userRooms} token={userToken} />
+                    </div>
                 </div>
             )}
         </main>

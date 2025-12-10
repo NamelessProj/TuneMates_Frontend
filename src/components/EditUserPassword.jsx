@@ -11,6 +11,11 @@ const EditUserPassword = ({token}) => {
 
     const {editUserPassword} = useUserStore();
 
+    /**
+     * Handles the form submission to update the user's password.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the password is updated.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 

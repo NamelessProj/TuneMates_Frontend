@@ -20,6 +20,12 @@ export const useRoomStore = create((set) => ({
     roomError: null,
     deleteSuccess: false,
 
+    /**
+     * Fetches a room by its slug. You must provide the correct password to access the room.
+     * @param slug {string} The slug of the room to fetch
+     * @param password {string} The password for the room
+     * @returns {Promise<void>} A promise that resolves when the room is fetched
+     */
     getRoomBySlug: async (slug, password) => {
         set({roomLoading: true, roomError: null});
         try {
@@ -40,6 +46,12 @@ export const useRoomStore = create((set) => ({
         }
     },
 
+    /**
+     * Fetches a room by its ID.
+     * @param id {number} The ID of the room to fetch
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the room is fetched
+     */
     getRoomById: async (id, token) => {
         set({roomLoading: true, roomError: null});
         try {
@@ -59,6 +71,11 @@ export const useRoomStore = create((set) => ({
         }
     },
 
+    /**
+     * Fetches all rooms associated with the authenticated user.
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the rooms are fetched
+     */
     getUserRooms: async (token) => {
         set({roomLoading: true, roomError: null});
         try {
@@ -77,6 +94,12 @@ export const useRoomStore = create((set) => ({
         }
     },
 
+    /**
+     * Creates a new room with the provided data.
+     * @param data {object} The data for the new room
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the room is created
+     */
     createRoom: async (data, token) => {
         set({roomLoading: true, roomError: null, room: null});
         try {
@@ -95,6 +118,13 @@ export const useRoomStore = create((set) => ({
         }
     },
 
+    /**
+     * Edits an existing room with the provided data.
+     * @param data {object} The updated data for the room
+     * @param roomId {number} The ID of the room to edit
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the room is edited
+     */
     editRoom: async (data, roomId, token) => {
         set({roomLoading: true, roomError: null});
         try {
@@ -113,6 +143,12 @@ export const useRoomStore = create((set) => ({
         }
     },
 
+    /**
+     * Deletes a room by its ID.
+     * @param id {number} The ID of the room to delete
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the room is deleted
+     */
     deleteRoom: async (id, token) => {
         set({roomLoading: true, roomError: null, deleteSuccess: false});
         try {

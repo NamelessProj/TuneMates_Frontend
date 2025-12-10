@@ -18,6 +18,11 @@ const SendSongViaUrl = () => {
         if (!room || slug.length === 0) navigate("/");
     }, [room, slug, navigate]);
 
+    /**
+     * Handles the form submission to send a song to the room.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the song is sent.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 

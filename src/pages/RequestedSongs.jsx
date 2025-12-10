@@ -34,10 +34,14 @@ const RequestedSongs = () => {
     useEffect(() => {
         if (!room || !roomId || isNaN(roomId) || !userInfo || !userToken) return;
 
+        /**
+         * Requests the pending songs for the room.
+         * @returns {Promise<void>} A promise that resolves when the songs are fetched.
+         */
         const requestPendingSongs = async () => {
             NProgress.start();
             const pendingStatusCode = 0;
-            await getAllSongsWithStatus(roomId, userToken, pendingStatusCode);
+            await getAllSongsWithStatus(Number.parseInt(roomId), userToken, pendingStatusCode);
             NProgress.done();
         }
 

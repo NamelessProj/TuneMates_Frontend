@@ -18,8 +18,8 @@ const Home = () => {
     const {currentRoom, roomError, roomLoading, getRoomBySlug} = useRoomStore();
 
     useEffect(() => {
-        if (currentRoom && hasSubmitted) navigate(`/room/slug/${slug}`);
-    }, [currentRoom, hasSubmitted, slug, navigate]);
+        if (currentRoom && hasSubmitted && !roomError) navigate(`/room/slug/${slug}`);
+    }, [currentRoom, hasSubmitted, roomError, slug, navigate]);
 
     /**
      * Handles the form submission to join a room.

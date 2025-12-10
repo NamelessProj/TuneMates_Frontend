@@ -40,8 +40,7 @@ export const useRoomStore = create((set) => ({
             set(() => ({currentRoom: res.data.room}));
             Cookies.set(roomKey, JSON.stringify(res.data.room));
         } catch (err) {
-            set({room: null, roomError: err?.response?.data?.message || err?.message || "Failed to load room"});
-            console.log(err);
+            set({room: null, roomError: err?.response?.data || err?.message || "Failed to load room"});
         } finally {
             set({roomLoading: false});
         }
@@ -66,7 +65,7 @@ export const useRoomStore = create((set) => ({
                 });
             set(() => ({room: res.data.room}));
         } catch (err) {
-            set({room: null, roomError: err?.response?.data?.message || err?.message || "Failed to load room"});
+            set({room: null, roomError: err?.response?.data || err?.message || "Failed to load room"});
         } finally {
             set({roomLoading: false});
         }
@@ -89,7 +88,7 @@ export const useRoomStore = create((set) => ({
             });
             set(() => ({userRooms: res.data}));
         } catch (err) {
-            set({userRooms: null, roomError: err?.response?.data?.message || err?.message || "Failed to load user rooms"});
+            set({userRooms: null, roomError: err?.response?.data || err?.message || "Failed to load user rooms"});
         } finally {
             set({roomLoading: false});
         }
@@ -113,7 +112,7 @@ export const useRoomStore = create((set) => ({
             });
             set(() => ({room: res.data.room}));
         } catch (err) {
-            set({room: null, roomError: err?.response?.data?.message || err?.message || "Failed to create room"});
+            set({room: null, roomError: err?.response?.data || err?.message || "Failed to create room"});
         } finally {
             set({roomLoading: false});
         }
@@ -138,7 +137,7 @@ export const useRoomStore = create((set) => ({
             });
             set(() => ({room: res.data.room}));
         } catch (err) {
-            set({roomError: err?.response?.data?.message || err?.message || "Failed to edit the room"});
+            set({roomError: err?.response?.data || err?.message || "Failed to edit the room"});
         } finally {
             set({roomLoading: false});
         }
@@ -162,7 +161,7 @@ export const useRoomStore = create((set) => ({
             });
             set(() => ({deleteSuccess: true}));
         } catch (err) {
-            set({deleteSuccess: null, roomError: err?.response?.data?.message || err?.message || "Failed to delete room"});
+            set({deleteSuccess: null, roomError: err?.response?.data || err?.message || "Failed to delete room"});
         } finally {
             set({roomLoading: false});
         }

@@ -1,4 +1,4 @@
-import {Badge, Button, Card, CardHeader, Typography} from "@material-tailwind/react";
+import {Button, Card, CardHeader, Typography} from "@material-tailwind/react";
 import {useRoomStore} from "../stores/roomStore.js";
 import NProgress from "nprogress";
 import {Link} from "react-router-dom";
@@ -22,66 +22,65 @@ const RoomListEl = ({room, token}) => {
     }
 
     return (
-        <Badge placement="top-start" color={room.isActive ? "green" : "red"}>
-            <Card
+        <Card
+            color="transparent"
+            shadow={false}
+            className="w-full min-w-[19rem] max-w-[26rem] bg-gray-500 bg-opacity-20 relative"
+        >
+            <span className={`absolute top-0 left-0 w-2 h-2 bg-${room.isActive ? 'green' : 'red'}`}></span>
+            <CardHeader
                 color="transparent"
+                floated={false}
                 shadow={false}
-                className="w-full min-w-[19rem] max-w-[26rem] bg-gray-500 bg-opacity-20"
+                className="mx-0 flex items-center gap-4 pt-0 pb-8"
             >
-                <CardHeader
-                    color="transparent"
-                    floated={false}
-                    shadow={false}
-                    className="mx-0 flex items-center gap-4 pt-0 pb-8"
-                >
-                    <div className="flex w-full flex-col gap-0.5 px-4">
-                        <div className="flex items-center justify-between">
-                            <Typography variant="h3" color="white">
-                                {room.name}
-                            </Typography>
+                <div className="flex w-full flex-col gap-0.5 px-4">
+                    <div className="flex items-center justify-between">
+                        <Typography variant="h3" color="white">
+                            {room.name}
+                        </Typography>
 
-                            <div className="flex flex-col justify-center items-center gap-2">
-                                <Link className=" w-full flex-1" to={`/room/edit/${room.id}`}>
-                                    <Button
-                                        color="green"
-                                        variant="gradient"
-                                        className="w-full"
-                                    >
-                                        Edit Room
-                                    </Button>
-                                </Link>
-
-                                <Link className="w-full flex-1" to={`/room/songs/${room.id}`}>
-                                    <Button
-                                        color="blue"
-                                        variant="gradient"
-                                        className="w-full"
-                                    >
-                                        Requested Songs
-                                    </Button>
-                                </Link>
-
+                        <div className="flex flex-col justify-center items-center gap-2">
+                            <Link className=" w-full flex-1" to={`/room/edit/${room.id}`}>
                                 <Button
+                                    color="green"
                                     variant="gradient"
-                                    color="red"
-                                    disabled={roomLoading}
-                                    onClick={handleDelete}
                                     className="w-full"
                                 >
-                                    {roomLoading ? <DefaultSpinner color="red" /> : "Delete"}
+                                    Edit Room
                                 </Button>
-                            </div>
+                            </Link>
+
+                            <Link className="w-full flex-1" to={`/room/songs/${room.id}`}>
+                                <Button
+                                    color="blue"
+                                    variant="gradient"
+                                    className="w-full"
+                                >
+                                    Requested Songs
+                                </Button>
+                            </Link>
+
+                            <Button
+                                variant="gradient"
+                                color="red"
+                                disabled={roomLoading}
+                                onClick={handleDelete}
+                                className="w-full"
+                            >
+                                {roomLoading ? <DefaultSpinner color="red" /> : "Delete"}
+                            </Button>
                         </div>
-                        <Typography color="white">
-                            Slug: {room.slug}
-                        </Typography>
-                        <Typography variant="small" color="white">
-                            Updated: {room?.lastUpdate ? format(room.lastUpdate, "eeee dd MMM yyyy 'at' kk:mm") : "unknown"}
-                        </Typography>
                     </div>
-                </CardHeader>
-            </Card>
-        </Badge>
+                    <Typography color="white">
+                        Slug: {room.slug}
+                    </Typography>
+                    <Typography variant="small" color="white">
+                        Updated: {room?.lastUpdate ? format(room.lastUpdate, "eeee dd MMM yyyy 'at' kk:mm") : "unknown"}
+                    </Typography>
+                </div>
+            </CardHeader>
+        </Card>
     );
 };
 

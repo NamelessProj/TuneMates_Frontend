@@ -17,6 +17,11 @@ const EditUser = ({userInfo, token}) => {
         }
     }, [userInfo, setEmail, setUsername]);
 
+    /**
+     * Handles the form submission to edit user information.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the user information is edited.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 

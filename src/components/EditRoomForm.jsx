@@ -26,6 +26,11 @@ const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
         }
     }, [userInfo, userToken, getUserPlaylist]);
 
+    /**
+     * Handles the form submission to edit the room.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the room is edited.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 

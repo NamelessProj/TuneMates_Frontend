@@ -41,6 +41,7 @@ export const useRoomStore = create((set) => ({
             Cookies.set(roomKey, JSON.stringify(res.data.room));
         } catch (err) {
             set({room: null, roomError: err?.response?.data?.message || err?.message || "Failed to load room"});
+            console.log(err);
         } finally {
             set({roomLoading: false});
         }

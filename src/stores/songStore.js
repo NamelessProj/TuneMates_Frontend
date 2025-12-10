@@ -9,6 +9,13 @@ export const useSongStore = create((set) => ({
     songLoading: false,
     songError: null,
 
+    /**
+     * Sends a song to the specified room by ID. You can provide either a song ID or a song URI.
+     * @param roomId {number} The ID of the room to send the song to
+     * @param songId {string|null} If provided, the Spotify song ID to send
+     * @param {string} songUri If provided, the Spotify song URI to send
+     * @returns {Promise<void>} A promise that resolves when the song is sent
+     */
     sendSongToRoom: async (roomId, songId=null, songUri="") => {
         set({songLoading: true, songError: null});
         try {
@@ -25,6 +32,13 @@ export const useSongStore = create((set) => ({
         }
     },
 
+    /**
+     * Fetches all songs from a room with the specified status.
+     * @param roomId {number} The ID of the room to fetch songs from
+     * @param token {string} The user's authentication token
+     * @param status {number} The status of the songs to fetch (default is `0` for pending songs)
+     * @returns {Promise<void>} A promise that resolves when the songs are fetched
+     */
     getAllSongsWithStatus: async (roomId, token, status=0) => {
         set({songLoading: true, songError: null});
         try {

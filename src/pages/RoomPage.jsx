@@ -7,11 +7,11 @@ import SearchSongs from "../components/SearchSongs.jsx";
 const RoomPage = () => {
     const navigate = useNavigate();
     const {slug} = useParams();
-    const {room} = useRoomStore();
+    const {currentRoom} = useRoomStore();
 
     useEffect(() => {
-        if (!room || slug.length === 0) navigate("/");
-    }, [room, slug, navigate]);
+        if (!currentRoom || slug.length === 0) navigate("/");
+    }, [currentRoom, slug, navigate]);
 
     return (
         <>
@@ -22,11 +22,11 @@ const RoomPage = () => {
                             Current Room
                         </Typography>
                         <Typography variant="h2" className="text-center text-balance">
-                            {room.name}
+                            {currentRoom.name}
                         </Typography>
                     </div>
 
-                    <SearchSongs roomId={room.id} />
+                    <SearchSongs roomId={currentRoom.id} />
                 </main>
             ) : null}
         </>

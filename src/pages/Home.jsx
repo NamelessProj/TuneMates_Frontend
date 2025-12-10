@@ -15,11 +15,11 @@ const Home = () => {
 
     const navigate = useNavigate();
 
-    const {room, roomError, roomLoading, getRoomBySlug} = useRoomStore();
+    const {currentRoom, roomError, roomLoading, getRoomBySlug} = useRoomStore();
 
     useEffect(() => {
-        if (room && hasSubmitted) navigate(`/room/slug/${slug}`);
-    }, [room, hasSubmitted, slug, navigate]);
+        if (currentRoom && hasSubmitted) navigate(`/room/slug/${slug}`);
+    }, [currentRoom, hasSubmitted, slug, navigate]);
 
     const handleJoinRoom = async (e) => {
         e.preventDefault();

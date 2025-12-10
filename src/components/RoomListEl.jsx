@@ -27,7 +27,7 @@ const RoomListEl = ({room, token}) => {
             shadow={false}
             className="w-full min-w-[19rem] max-w-[26rem] bg-gray-500 bg-opacity-20 relative"
         >
-            <span className={`absolute top-0 left-0 w-2 h-2 bg-${room.isActive ? 'green' : 'red'}`}></span>
+            <span className={`absolute top-0 left-0 w-3 h-3 rounded-full bg-${room.isActive ? 'green' : 'red'}-500`}></span>
             <CardHeader
                 color="transparent"
                 floated={false}

@@ -21,6 +21,10 @@ const SpotifyCallback = () => {
     const error = urlParams.get('error');
 
     useEffect(() => {
+        /**
+         * Handles the Spotify callback by exchanging the authorization code for tokens.
+         * @returns {Promise<void>} A promise that resolves when the process is complete.
+         */
         const run = async () => {
             if (error) {
                 setErrorMessage(`Spotify authorization error: ${error}`);

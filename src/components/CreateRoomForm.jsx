@@ -35,6 +35,11 @@ const CreateRoomForm = ({token}) => {
         }
     }, [userInfo, userToken, navigate, getUserPlaylist]);
 
+    /**
+     * Handles the form submission to create a new room.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the room creation is complete.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 

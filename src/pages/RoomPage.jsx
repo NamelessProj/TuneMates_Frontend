@@ -15,7 +15,7 @@ const RoomPage = () => {
 
     return (
         <>
-            {room ? (
+            {currentRoom ? (
                 <main>
                     <div>
                         <Typography variant="lead" className="text-center text-balance">

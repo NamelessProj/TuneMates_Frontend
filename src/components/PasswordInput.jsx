@@ -1,7 +1,7 @@
 import {Button, Input} from "@material-tailwind/react";
 import {useState} from "react";
 
-const PasswordInput = ({password, setPassword, label="Password", name="password", id="password", inputClassName=""}) => {
+const PasswordInput = ({password, setPassword, color=null, label="Password", name="password", id="password", inputClassName=""}) => {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     return (
@@ -15,6 +15,7 @@ const PasswordInput = ({password, setPassword, label="Password", name="password"
                 id={id}
                 label={label}
                 variant="outlined"
+                color={color}
                 required
             />
             <Button

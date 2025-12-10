@@ -21,6 +21,11 @@ const Home = () => {
         if (currentRoom && hasSubmitted) navigate(`/room/slug/${slug}`);
     }, [currentRoom, hasSubmitted, slug, navigate]);
 
+    /**
+     * Handles the form submission to join a room.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the room is joined.
+     */
     const handleJoinRoom = async (e) => {
         e.preventDefault();
         setError("");

@@ -30,6 +30,11 @@ const LoginForm = () => {
         if (userInfo) navigate("/");
     }, [userInfo, navigate]);
 
+    /**
+     * Handles the form submission for user login.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the login is complete.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');

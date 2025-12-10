@@ -26,7 +26,7 @@ export const useSongStore = create((set) => ({
                     method: "POST",
                 });
         } catch (err) {
-            set({songError: err?.response?.data?.message || err?.message || "Failed to send song to room"});
+            set({songError: err?.response?.data || err?.message || "Failed to send song to room"});
         } finally {
             set({songLoading: false});
         }
@@ -52,7 +52,7 @@ export const useSongStore = create((set) => ({
                 });
             set(() => ({pendingSongs: res.data}));
         } catch (err) {
-            set({songError: err?.response?.data?.message || err?.message || "Failed to get songs from room"});
+            set({songError: err?.response?.data || err?.message || "Failed to get songs from room"});
         } finally {
             set({songLoading: false});
         }

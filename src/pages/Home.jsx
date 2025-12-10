@@ -60,8 +60,8 @@ const Home = () => {
             {roomLoading ? (
                 <DefaultSpinner />
             ) : (
-                <Card className="w-[min(500px,100%)] mx-auto my-6">
-                    <CardHeader floated={false} shadow={false}>
+                <Card color="gray" className="w-[min(500px,100%)] mx-auto my-6">
+                    <CardHeader color="gray" floated={false} shadow={false}>
                         <Typography variant="h5" className="text-center text-balance">
                             Let join a room
                         </Typography>
@@ -85,6 +85,7 @@ const Home = () => {
                                 name="slug"
                                 id="slug"
                                 label="Enter the room slug"
+                                color="white"
                                 required
                             />
                             <PasswordInput
@@ -92,6 +93,7 @@ const Home = () => {
                                 setPassword={setPassword}
                                 label="Enter the room's password"
                                 inputClassName="!rounded-none"
+                                color="white"
                             />
                             <Button
                                 variant="gradient"

@@ -25,7 +25,7 @@ export const useUserStore = create((set) => ({
                 });
             set(() => ({user: res.data.user, token: res.data.token}));
         }catch(err){
-            set({user: null, userError: err?.response?.data?.message || err?.message || "Failed to register"});
+            set({user: null, userError: err?.response?.data || err?.message || "Failed to register"});
         }finally{
             set({userLoading: false});
         }
@@ -47,7 +47,7 @@ export const useUserStore = create((set) => ({
                 });
             set(() => ({user: res.data.user, token: res.data.token}));
         }catch(err){
-            set({user: null, userError: err?.response?.data?.message || err?.message || "Failed to login"});
+            set({user: null, userError: err?.response?.data || err?.message || "Failed to login"});
         }finally{
             set({userLoading: false});
         }
@@ -73,7 +73,7 @@ export const useUserStore = create((set) => ({
                 });
             set(() => ({user: res.data.user}));
         }catch(err){
-            set({userError: err?.response?.data?.message || err?.message || "Failed to edit user"});
+            set({userError: err?.response?.data || err?.message || "Failed to edit user"});
         }finally{
             set({userLoading: false});
         }
@@ -99,7 +99,7 @@ export const useUserStore = create((set) => ({
                 });
             set(() => ({user: res.data.user}));
         }catch(err){
-            set({userError: err?.response?.data?.message || err?.message || "Failed to edit user's password"});
+            set({userError: err?.response?.data || err?.message || "Failed to edit user's password"});
         }finally{
             set({userLoading: false});
         }
@@ -126,7 +126,7 @@ export const useUserStore = create((set) => ({
                 });
             set(() => ({user: res.data.user}));
         }catch(err){
-            set({userError: err?.response?.data?.message || err?.message || "Failed to connect user to Spotify"});
+            set({userError: err?.response?.data || err?.message || "Failed to connect user to Spotify"});
         }finally{
             set({userLoading: false});
         }
@@ -154,7 +154,7 @@ export const useUserStore = create((set) => ({
                 });
             set(() => ({user: null}));
         }catch(err){
-            set({userError: err?.response?.data?.message || err?.message || "Failed to delete user"});
+            set({userError: err?.response?.data || err?.message || "Failed to delete user"});
         }finally{
             set({userLoading: false});
         }

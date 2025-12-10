@@ -22,7 +22,7 @@ export const useSpotifyStore = create((set) => ({
             });
             set(() => ({spotifyAuthUrl: res.data.url}));
         } catch (err) {
-            set({spotifyAuthUrl: null, spotifyError: err?.response?.data?.message || err?.message || "Failed to fetch Spotify authorization URL"});
+            set({spotifyAuthUrl: null, spotifyError: err?.response?.data || err?.message || "Failed to fetch Spotify authorization URL"});
         } finally {
             set({spotifyLoading: false});
         }
@@ -48,8 +48,7 @@ export const useSpotifyStore = create((set) => ({
                     method: "POST"
                 });
         } catch (err) {
-            set({spotifyError: err?.response?.data?.message || err?.message || "Failed to add the song to the playlist"});
-            console.log(err);
+            set({spotifyError: err?.response?.data || err?.message || "Failed to add the song to the playlist"});
         } finally {
             set({spotifyLoading: false});
         }
@@ -73,7 +72,7 @@ export const useSpotifyStore = create((set) => ({
                 });
             set(() => ({userPlaylists: res.data.items}));
         } catch (err) {
-            set({spotifyError: err?.response?.data?.message || err?.message || "Failed to load user playlists"});
+            set({spotifyError: err?.response?.data || err?.message || "Failed to load user playlists"});
         } finally {
             set({spotifyLoading: false});
         }

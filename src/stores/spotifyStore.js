@@ -9,6 +9,10 @@ export const useSpotifyStore = create((set) => ({
     spotifyLoading: false,
     spotifyError: null,
 
+    /**
+     * Fetches the Spotify authorization URL for user authentication.
+     * @returns {Promise<void>} A promise that resolves when the URL is fetched
+     */
     fetchSpotifyAuthUrl: async () => {
         set({spotifyLoading: true, spotifyError: null});
         try {
@@ -24,6 +28,13 @@ export const useSpotifyStore = create((set) => ({
         }
     },
 
+    /**
+     * Adds a song to the playlist of the specified room.
+     * @param roomId {number} The ID of the room
+     * @param songId {number} The ID of the song to add
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the song is added
+     */
     addSongToPlaylist: async (roomId, songId, token) => {
         set({spotifyLoading: true, spotifyError: null});
         try {
@@ -44,6 +55,11 @@ export const useSpotifyStore = create((set) => ({
         }
     },
 
+    /**
+     * Fetches the user's Spotify playlists.
+     * @param token {string} The user's authentication token
+     * @returns {Promise<void>} A promise that resolves when the playlists are fetched
+     */
     getUserPlaylist: async (token) => {
         set({spotifyLoading: true, spotifyError: null});
         try {

@@ -17,6 +17,7 @@ const SearchSongsForm = ({input, setInput, error, handleSearch}) => {
                     onChange={(e) => setInput(e.target.value)}
                     label="Search Songs"
                     className="rounded-b-none md:rounded-bl-[7px] md:rounded-tr-none"
+                    color="white"
                 />
                 <Button
                     type="submit"

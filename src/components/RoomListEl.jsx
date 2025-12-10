@@ -8,6 +8,11 @@ import DefaultSpinner from "./DefaultSpinner.jsx";
 const RoomListEl = ({room, token}) => {
     const {roomLoading, deleteRoom} = useRoomStore();
 
+    /**
+     * Handles the deletion of a room.
+     * @param e {React.MouseEvent} e - The click event.
+     * @returns {Promise<void>} A promise that resolves when the room is deleted.
+     */
     const handleDelete = async (e) => {
         e.preventDefault();
         if (roomLoading) return;

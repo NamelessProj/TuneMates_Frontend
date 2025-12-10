@@ -3,7 +3,7 @@ export default class Cookies {
      * Sets a cookie with the given name, value, and expiration in days.
      * @param name {string} The name of the cookie
      * @param value {string} The value of the cookie
-     * @param days Number of days until the cookie expires (default is 7)
+     * @param days {number} Number of days until the cookie expires (default is 7)
      * @returns {void}
      */
     static set(name, value, days=7) {

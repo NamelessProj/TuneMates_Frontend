@@ -36,7 +36,7 @@ const RoomPage = () => {
                                 <Button
                                     color="red"
                                     variant="text"
-                                    className="fill-red-300 hover:fill-red-500"
+                                    className="fill-red-300 hover:fill-red-500 flex justify-center items-center"
                                     onClick={handleQuitRoom}
                                 >
                                     <p className="sr-only">Click here to quit the room</p>

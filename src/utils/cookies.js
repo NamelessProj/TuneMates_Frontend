@@ -1,4 +1,11 @@
 export default class Cookies {
+    /**
+     * Sets a cookie with the given name, value, and expiration in days.
+     * @param name {string} The name of the cookie
+     * @param value {string} The value of the cookie
+     * @param days Number of days until the cookie expires (default is 7)
+     * @returns {void}
+     */
     static set(name, value, days=7) {
         if (typeof document === 'undefined') return;
         const expires = new Date(Date.now() + (days * 864e5)).toUTCString();
@@ -7,6 +14,11 @@ export default class Cookies {
         document.cookie = cookie;
     }
 
+    /**
+     * Gets the value of a cookie by name.
+     * @param name {string} The name of the cookie
+     * @returns {string|null} The value of the cookie, or null if not found
+     */
     static get(name) {
         if (typeof document === 'undefined') return null;
         const encodedName = encodeURIComponent(name) + '=';
@@ -19,6 +31,11 @@ export default class Cookies {
         return null;
     }
 
+    /**
+     * Deletes a cookie by name.
+     * @param name {string} The name of the cookie
+     * @returns {void}
+     */
     static delete(name) {
         this.set(name, '', -1);
     }

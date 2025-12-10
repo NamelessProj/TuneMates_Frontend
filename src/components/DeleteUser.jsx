@@ -21,6 +21,10 @@ const DeleteUser = ({token}) => {
 
     const {deleteUser} = useUserStore();
 
+    /**
+     * Handles the dialog open/close action.
+     * @param e {React.MouseEvent} e - The mouse event.
+     */
     const handleOpen = (e) => {
         e.preventDefault();
         setError("");
@@ -33,6 +37,11 @@ const DeleteUser = ({token}) => {
         setOpen(!open);
     }
 
+    /**
+     * Handles the user deletion process.
+     * @param e {React.MouseEvent} e - The mouse event.
+     * @returns {Promise<void>} A promise that resolves when the user is deleted.
+     */
     const handleDeleting = async (e) => {
         e.preventDefault();
 

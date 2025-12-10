@@ -7,6 +7,7 @@ import NProgress from "nprogress";
 import {Link, useNavigate} from "react-router-dom";
 import focusById from "../utils/focusById.js";
 import PasswordInput from "./PasswordInput.jsx";
+import validateEmail from "../utils/validateEmail.js";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
@@ -32,6 +33,11 @@ const RegisterForm = () => {
         if (userInfo) navigate("/");
     }, [userInfo, navigate]);
 
+    /**
+     * Handles the registration form submission.
+     * @param e {React.FormEvent} e - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the registration is complete.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -50,8 +56,7 @@ const RegisterForm = () => {
             return;
         }
 
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        if (!emailRegex.test(emailForm)) {
+        if (!validateEmail(emailForm)) {
             setError('Please enter a valid email');
             focusById('email');
             return;

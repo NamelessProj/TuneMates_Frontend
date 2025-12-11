@@ -1,7 +1,7 @@
 import {Avatar, Button, Card, CardHeader, Chip, Typography} from "@material-tailwind/react";
 import {format} from "date-fns";
 
-const SongItem = ({song, calcDuration, playlistId=null, handleSendSongToRoom=null, handleAddSongToPlaylist=null}) => {
+const SongItem = ({song, calcDuration, hasPlaylist=null, handleSendSongToRoom=null, handleAddSongToPlaylist=null}) => {
     return (
         <Card
             color="transparent"
@@ -41,7 +41,7 @@ const SongItem = ({song, calcDuration, playlistId=null, handleSendSongToRoom=nul
                             </Button>
                         )  : null}
 
-                        {(playlistId && typeof handleAddSongToPlaylist === "function") ? (
+                        {(hasPlaylist && typeof handleAddSongToPlaylist === "function") ? (
                             <Button
                                 size="sm"
                                 color="green"

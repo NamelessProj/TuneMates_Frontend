@@ -5,7 +5,7 @@ import SelectPlaylist from "./SelectPlaylist.jsx";
 const SelectPlaylistWrapper = ({userInfo, loading, error, playlists, value, setValue}) => {
     return (
         <>
-            {userInfo.spotifyId !== "" ? (
+            {userInfo.spotifyId ? (
                 <>
                     {loading ? (
                         <div className="flex justify-center items-center my-3">

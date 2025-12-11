@@ -94,6 +94,7 @@ const RequestedSongs = () => {
 
                     <OwnerSongList
                         songs={pendingSongs}
+                        hasPlaylist={room.hasPlaylist}
                         handleAddSongToPlaylist={handleAddSongToPlaylist}
                     />
                 </main>

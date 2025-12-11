@@ -52,7 +52,7 @@ const SpotifyCallback = () => {
     }, [error, code, state, userToken, connectUserToSpotify]);
 
     useEffect(() => {
-        if (!userInfo || userInfo.spotifyId !== "") navigate("/"); // If user is already connected to Spotify or not logged in, redirect to home
+        if (!userInfo || userInfo.spotifyId) navigate("/"); // If user is already connected to Spotify or not logged in, redirect to home
 
         if (user && !userError) {
             setCredentials(user);

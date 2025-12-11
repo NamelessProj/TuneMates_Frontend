@@ -30,7 +30,7 @@ const CreateRoomForm = ({token}) => {
     useEffect(() => {
         if (!userInfo || !userToken) navigate("/login");
 
-        if (userInfo.spotifyId !== "") {
+        if (userInfo.spotifyId) {
             getUserPlaylist(userToken);
         }
     }, [userInfo, userToken, navigate, getUserPlaylist]);

@@ -21,7 +21,7 @@ const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
     }, [room]);
 
     useEffect(() => {
-        if (userInfo && userToken && userInfo.spotifyId !== "") {
+        if (userInfo && userToken && userInfo.spotifyId) {
             getUserPlaylist(userToken);
         }
     }, [userInfo, userToken, getUserPlaylist]);

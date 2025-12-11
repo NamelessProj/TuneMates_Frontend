@@ -68,7 +68,7 @@ const Header = () => {
                                     Logout
                                 </Button>
                             </MenuItem>
-                            {userInfo.spotifyId !== "" ? null : (
+                            {userInfo.spotifyId ? null : (
                                 <MenuItem>
                                     <Link to="spotify/connect">
                                         <Button

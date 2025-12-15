@@ -67,7 +67,9 @@ const RequestedSongs = () => {
         if (!songId || isNaN(songId)) return;
 
         NProgress.start();
-        await addSongToPlaylist(roomId, songId, userToken);
+        const res = await addSongToPlaylist(roomId, songId, userToken);
+        const msg = res ? "Song added to playlist successfully!" : "Failed to add song to playlist. Please try again.";
+        toast(msg, {type: res ? "success" : "error"});
         NProgress.done();
     }
 

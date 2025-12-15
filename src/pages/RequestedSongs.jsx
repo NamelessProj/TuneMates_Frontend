@@ -15,7 +15,7 @@ const RequestedSongs = () => {
     const {roomId} = useParams();
     const {pendingSongs, songError, songLoading, getAllSongsWithStatus} = useSongStore();
     const {room, roomLoading, getRoomById} = useRoomStore();
-    const {spotifyError, addSongToPlaylist} = useSpotifyStore();
+    const {addSongToPlaylist} = useSpotifyStore();
     const {userInfo, userToken} = useAuthStore();
 
     const navigate = useNavigate();
@@ -58,10 +58,6 @@ const RequestedSongs = () => {
             clearInterval(intervalFunc);
         }
     }, [room, roomId, userToken, userInfo, getAllSongsWithStatus]);
-
-    useEffect(() => {
-        if (spotifyError) toast(spotifyError, {type: "error"});
-    }, [spotifyError]);
 
     const handleAddSongToPlaylist = async (e, songId) => {
         e.preventDefault();

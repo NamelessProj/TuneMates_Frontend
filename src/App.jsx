@@ -23,6 +23,7 @@ const App = () => {
                 <Route path="register" element={<Register />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="room">
+                    <Route index element={<ErrorPage />} />
                     <Route path="create" element={<CreateRoom />} />
                     <Route path="slug/:slug" element={<RoomPage />} />
                     <Route path="slug/:slug/url" element={<SendSongViaUrl />} />
@@ -33,6 +34,7 @@ const App = () => {
                     <Route index element={<Rooms />} />
                 </Route>
                 <Route path="spotify">
+                    <Route index element={<ErrorPage />} />
                     <Route path="connect" element={<SpotifyConnect />} />
                     <Route path="callback" element={<SpotifyCallback />} />
                 </Route>

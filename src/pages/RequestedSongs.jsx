@@ -1,3 +1,4 @@
+// javascript
 import {useSongStore} from "../stores/songStore.js";
 import NProgress from "nprogress";
 import {useNavigate, useParams} from "react-router-dom";
@@ -23,7 +24,7 @@ const RequestedSongs = () => {
         if (!roomId || isNaN(roomId) || !userInfo || !userToken) navigate("/login");
 
         NProgress.start();
-        getRoomById(roomId, userToken);
+        getRoomById(roomId, userToken).then();
         NProgress.done();
     }, [roomId, userInfo, userToken, navigate, getRoomById]);
 
@@ -88,7 +89,7 @@ const RequestedSongs = () => {
                         {room?.name || "Unknown Room"}
                     </Typography>
 
-                    {(songLoading && pendingSongs.length > 0) ? (
+                    {(songLoading && (pendingSongs?.length ?? 0) > 0) ? (
                         <div className="flex justify-center items-center my-6">
                             <DefaultSpinner />
                         </div>
@@ -96,7 +97,7 @@ const RequestedSongs = () => {
 
                     <OwnerSongList
                         songs={pendingSongs}
-                        hasPlaylist={room.hasPlaylist}
+                        hasPlaylist={room?.hasPlaylist ?? false}
                         handleAddSongToPlaylist={handleAddSongToPlaylist}
                     />
                 </main>

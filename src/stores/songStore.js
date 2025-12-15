@@ -14,9 +14,10 @@ export const useSongStore = create((set) => ({
      * @param roomId {number} The ID of the room to send the song to
      * @param songId {string|null} If provided, the Spotify song ID to send
      * @param {string} songUri If provided, the Spotify song URI to send
-     * @returns {Promise<void>} A promise that resolves when the song is sent
+     * @returns {Promise<boolean>} A promise that resolves to `true` if the song was sent successfully, or `false` otherwise
      */
     sendSongToRoom: async (roomId, songId=null, songUri="") => {
+        let result = false;
         set({songLoading: true, songError: null});
         try {
             await axios.post(`${baseUrl}/room/${roomId}/${songId || ""}`,
@@ -25,11 +26,13 @@ export const useSongStore = create((set) => ({
                     withCredentials: true,
                     method: "POST",
                 });
+            result = true;
         } catch (err) {
             set({songError: err?.response?.data || err?.message || "Failed to send song to room"});
         } finally {
             set({songLoading: false});
         }
+        return result;
     },
 
     /**

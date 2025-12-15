@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useRoomStore} from "../stores/roomStore.js";
 import NProgress from "nprogress";
 import {Alert, Button, Input, Typography} from "@material-tailwind/react";
+import {toast} from "react-toastify";
 
 const SendSongViaUrl = () => {
     const navigate = useNavigate();
@@ -33,7 +34,9 @@ const SendSongViaUrl = () => {
         }
 
         NProgress.start();
-        await sendSongToRoom(room.id, null, uri);
+        const res = await sendSongToRoom(room.id, null, uri);
+        const msg = res ? "Song sent successfully!" : "Failed to send song. Please check the URL/URI and try again.";
+        toast(msg, {type: res ? "success" : "error"});
         NProgress.done();
     }
 

@@ -33,9 +33,10 @@ export const useSpotifyStore = create((set) => ({
      * @param roomId {number} The ID of the room
      * @param songId {number} The ID of the song to add
      * @param token {string} The user's authentication token
-     * @returns {Promise<void>} A promise that resolves when the song is added
+     * @returns {Promise<boolean>} A promise that resolves to `true` if the song was added successfully, or `false` otherwise
      */
     addSongToPlaylist: async (roomId, songId, token) => {
+        let result = false;
         set({spotifyLoading: true, spotifyError: null});
         try {
             await axios.post(`${baseUrl}/playlist/${roomId}/${songId}`,
@@ -47,11 +48,13 @@ export const useSpotifyStore = create((set) => ({
                     },
                     method: "POST"
                 });
+            result = true;
         } catch (err) {
             set({spotifyError: err?.response?.data || err?.message || "Failed to add the song to the playlist"});
         } finally {
             set({spotifyLoading: false});
         }
+        return result;
     },
 
     /**

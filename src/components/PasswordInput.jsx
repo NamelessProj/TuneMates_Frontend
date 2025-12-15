@@ -15,6 +15,7 @@ const PasswordInput = ({password, setPassword, color=null, label="Password", nam
                 id={id}
                 label={label}
                 variant="outlined"
+                autoComplete="current-password"
                 color={color}
                 required
             />

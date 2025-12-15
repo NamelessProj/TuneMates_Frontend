@@ -122,8 +122,9 @@ const SearchSongs = ({roomId}) => {
         e.preventDefault();
 
         NProgress.start();
-        await sendSongToRoom(roomId, songId);
-        toast("Requested song successfully!", {type: "success"});
+        const res = await sendSongToRoom(roomId, songId);
+        const msg = res ? "Song sent successfully!" : "Failed to send song. Please try again.";
+        toast(msg, {type: res ? "success" : "error"});
         NProgress.done();
     }
 

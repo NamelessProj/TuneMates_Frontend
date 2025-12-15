@@ -21,6 +21,7 @@ const PasswordInput = ({password, setPassword, color=null, label="Password", nam
             <Button
                 variant="text"
                 size="sm"
+                color={color}
                 className="!absolute top-0 bottom-0 right-0"
                 onClick={() => setPasswordVisible(!passwordVisible)}
             >

@@ -6,7 +6,7 @@ export default class Cookies {
      * @param days {number} Number of days until the cookie expires (default is 7)
      * @returns {void}
      */
-    static set(name, value, days=7) {
+    static set(name, value, days=2) {
         if (typeof document === 'undefined') return;
         const expires = new Date(Date.now() + (days * 864e5)).toUTCString();
         let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;

@@ -6,10 +6,17 @@ import {useEffect} from "react";
 import EditUser from "../components/EditUser.jsx";
 import EditUserPassword from "../components/EditUserPassword.jsx";
 import DeleteUser from "../components/DeleteUser.jsx";
+import {useNavigate} from "react-router-dom";
 
 const Profile = () => {
     const {userInfo, setCredentials} = useAuthStore();
     const {user, token, userError, userLoading} = useUserStore();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!userInfo || !token) navigate("/");
+    }, [userInfo, token, navigate]);
 
     useEffect(() => {
         if (user) setCredentials(user);

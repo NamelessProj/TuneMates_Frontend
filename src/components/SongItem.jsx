@@ -20,9 +20,11 @@ const SongItem = ({song, calcDuration, hasPlaylist=null, handleSendSongToRoom=nu
         } else if (hasPlaylist && typeof handleAddSongToPlaylist === "function") {
             const res = handleAddSongToPlaylist(song.id);
 
+            const animationDuration = 500; // in milliseconds
+
             // If the song was added successfully, animate and remove the element
             if (res) {
-                ref.current.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+                ref.current.style.transition = `opacity ${animationDuration}ms ease-out, transform ${animationDuration}ms ease-out`;
                 ref.current.style.opacity = "0";
                 ref.current.style.transform = "translateY(-20px)";
 
@@ -31,7 +33,7 @@ const SongItem = ({song, calcDuration, hasPlaylist=null, handleSendSongToRoom=nu
                     if (ref.current) {
                         ref.current.style.display = "none";
                     }
-                }, 600);
+                }, animationDuration + 50); // Extra 50ms to ensure the animation completes
             }
         }
     }

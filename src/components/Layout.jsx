@@ -2,6 +2,7 @@ import {ToastContainer} from "react-toastify";
 import Header from "./Header.jsx";
 import {Outlet} from "react-router-dom";
 import Footer from "./Footer.jsx";
+import {Analytics} from "@vercel/analytics/react";
 
 const Layout = () => {
     return (
@@ -11,6 +12,7 @@ const Layout = () => {
             <Outlet />
             <div></div>
             <Footer />
+            <Analytics />
         </div>
     );
 };

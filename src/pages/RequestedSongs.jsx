@@ -59,15 +59,20 @@ const RequestedSongs = () => {
         }
     }, [room, roomId, userToken, userInfo, getAllSongsWithStatus]);
 
-    const handleAddSongToPlaylist = async (e, songId) => {
-        e.preventDefault();
-        if (!songId || isNaN(songId)) return;
+    /**
+     * Handles adding a song to the playlist.
+     * @param songId {number} The ID of the song to add.
+     * @returns {Promise<boolean>} A promise that resolves to true if the song was added successfully, false otherwise.
+     */
+    const handleAddSongToPlaylist = async (songId) => {
+        if (!songId || isNaN(songId)) return false;
 
         NProgress.start();
         const res = await addSongToPlaylist(roomId, songId, userToken);
         const msg = res ? "Song added to playlist successfully!" : "Failed to add song to playlist. Please try again.";
         toast(msg, {type: res ? "success" : "error"});
         NProgress.done();
+        return res;
     }
 
     return (

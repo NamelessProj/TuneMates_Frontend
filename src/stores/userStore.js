@@ -136,9 +136,10 @@ export const useUserStore = create((set) => ({
      * Deletes the authenticated user's account.
      * @param password {string} The user's current password for verification
      * @param token {string} The user's authentication token
-     * @returns {Promise<void>} A promise that resolves when the user is deleted
+     * @returns {Promise<boolean>} A promise that resolves to `true` if the user was deleted successfully, `false` otherwise
      */
     deleteUser: async (password, token) => {
+        let result = false;
         set({userLoading: true, userError: null});
         try{
             await axios.post(`${baseUrl}/delete/me`,
@@ -153,10 +154,12 @@ export const useUserStore = create((set) => ({
                     },
                 });
             set(() => ({user: null}));
+            result = true;
         }catch(err){
             set({userError: err?.response?.data || err?.message || "Failed to delete user"});
         }finally{
             set({userLoading: false});
         }
+        return result;
     }
 }));

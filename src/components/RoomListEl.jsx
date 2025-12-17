@@ -31,6 +31,7 @@ const RoomListEl = ({room, token}) => {
             toast("Room deleted successfully.", {type: "success"});
             ref.current.style.display = "none";
             ref.current.remove();
+            location.reload();
         } else {
             toast("Failed to delete the room.", {type: "error"});
         }

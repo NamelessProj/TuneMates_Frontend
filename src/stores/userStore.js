@@ -62,11 +62,11 @@ export const useUserStore = create((set) => ({
     editUser: async (data, token) => {
         set({userLoading: true, userError: null});
         try{
-            const res = await axios.post(`${baseUrl}/me`,
+            const res = await axios.put(`${baseUrl}/me`,
                 data,
                 {
                     withCredentials: true,
-                    method: "POST",
+                    method: "PUT",
                     headers: {
                         Authorization: `Bearer ${token}`
                     },
@@ -88,11 +88,11 @@ export const useUserStore = create((set) => ({
     editUserPassword: async (data, token) => {
         set({userLoading: true, userError: null});
         try{
-            const res = await axios.post(`${baseUrl}/me/password`,
+            const res = await axios.put(`${baseUrl}/me/password`,
                 data,
                 {
                     withCredentials: true,
-                    method: "POST",
+                    method: "PUT",
                     headers: {
                         Authorization: `Bearer ${token}`
                     },

@@ -10,6 +10,7 @@ import {
     Typography
 } from "@material-tailwind/react";
 import {useUserStore} from "../stores/userStore.js";
+import {useAuthStore} from "../stores/authStore.js";
 import {useState} from "react";
 import PasswordInput from "./PasswordInput.jsx";
 import NProgress from "nprogress";
@@ -20,6 +21,7 @@ const DeleteUser = ({token}) => {
     const [open, setOpen] = useState(false);
 
     const {deleteUser} = useUserStore();
+    const {logout} = useAuthStore();
 
     /**
      * Handles the dialog open/close action.
@@ -46,7 +48,8 @@ const DeleteUser = ({token}) => {
         e.preventDefault();
 
         NProgress.start();
-        await deleteUser(password, token);
+        const res = await deleteUser(password, token);
+        if (res) logout();
         NProgress.done();
     }
 

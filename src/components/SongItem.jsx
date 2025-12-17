@@ -16,22 +16,24 @@ const SongItem = ({song, calcDuration, hasPlaylist=null, handleSendSongToRoom=nu
         if (!ref.current) return;
 
         if (typeof handleSendSongToRoom === "function") {
-            handleSendSongToRoom(song.id)
+            handleSendSongToRoom(song.id);
         } else if (hasPlaylist && typeof handleAddSongToPlaylist === "function") {
-            handleAddSongToPlaylist(song.id)
-        }
+            const res = handleAddSongToPlaylist(song.id);
 
-        // Making the card disappear
-        ref.current.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
-        ref.current.style.opacity = "0";
-        ref.current.style.transform = "translateY(-20px)";
+            // If the song was added successfully, animate and remove the element
+            if (res) {
+                ref.current.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+                ref.current.style.opacity = "0";
+                ref.current.style.transform = "translateY(-20px)";
 
-        // Optionally, you can remove the element from the DOM after the animation
-        setTimeout(() => {
-            if (ref.current) {
-                ref.current.style.display = "none";
+                // Remove the element from the DOM after the animation
+                setTimeout(() => {
+                    if (ref.current) {
+                        ref.current.style.display = "none";
+                    }
+                }, 600);
             }
-        }, 500);
+        }
     }
 
     return (

@@ -156,9 +156,10 @@ export const useRoomStore = create((set) => ({
      * Deletes a room by its ID.
      * @param id {number} The ID of the room to delete
      * @param token {string} The user's authentication token
-     * @returns {Promise<void>} A promise that resolves when the room is deleted
+     * @returns {Promise<boolean>} A promise that resolves to `true` if the room was deleted successfully, `false` otherwise
      */
     deleteRoom: async (id, token) => {
+        let result = false;
         set({roomLoading: true, roomError: null, deleteSuccess: false});
         try {
             await axios.delete(`${baseUrl}/${id}`,{
@@ -169,10 +170,12 @@ export const useRoomStore = create((set) => ({
                 method: "DELETE",
             });
             set(() => ({deleteSuccess: true}));
+            result = true;
         } catch (err) {
             set({deleteSuccess: null, roomError: err?.response?.data || err?.message || "Failed to delete room"});
         } finally {
             set({roomLoading: false});
         }
+        return result;
     }
 }));

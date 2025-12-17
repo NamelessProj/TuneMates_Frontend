@@ -4,9 +4,12 @@ import NProgress from "nprogress";
 import {Link} from "react-router-dom";
 import {format} from "date-fns";
 import DefaultSpinner from "./DefaultSpinner.jsx";
+import {useRef} from "react";
+import {toast} from "react-toastify";
 
 const RoomListEl = ({room, token}) => {
     const {roomLoading, deleteRoom} = useRoomStore();
+    const ref = useRef(null);
 
     /**
      * Handles the deletion of a room.
@@ -15,10 +18,21 @@ const RoomListEl = ({room, token}) => {
      */
     const handleDelete = async (e) => {
         e.preventDefault();
+
+        if (!ref.current) return
+
         if (roomLoading) return;
         NProgress.start();
-        await deleteRoom(room.id, token);
+        const res = await deleteRoom(room.id, token);
         NProgress.done();
+
+        // Remove the element from the DOM if deletion was successful
+        if (res) {
+            toast("Room deleted successfully.", {type: "success"});
+            ref.current.remove();
+        } else {
+            toast("Failed to delete the room.", {type: "error"});
+        }
     }
 
     return (
@@ -26,6 +40,7 @@ const RoomListEl = ({room, token}) => {
             color="transparent"
             shadow={false}
             className="w-full min-w-[19rem] max-w-[26rem] bg-gray-500 bg-opacity-20 relative"
+            ref={ref}
         >
             <span className={`absolute top-[-3px] left-[-3px] w-3 h-3 rounded-full bg-${room.isActive ? 'green' : 'red'}-500`}>
                 <p className="sr-only">{room.isActive ? "This room is active." : "This room is not active."}</p>

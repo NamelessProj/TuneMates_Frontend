@@ -14,6 +14,7 @@ import {useAuthStore} from "../stores/authStore.js";
 import {useState} from "react";
 import PasswordInput from "./PasswordInput.jsx";
 import NProgress from "nprogress";
+import {toast} from "react-toastify";
 
 const DeleteUser = ({token}) => {
     const [password, setPassword] = useState("");
@@ -49,7 +50,12 @@ const DeleteUser = ({token}) => {
 
         NProgress.start();
         const res = await deleteUser(password, token);
-        if (res) logout();
+        if (res) {
+            logout();
+            toast("Account deleted successfully.", {type: "success"});
+        } else {
+            toast("Failed to delete account. Please check your password and try again.", {type: "error"});
+        }
         NProgress.done();
     }
 

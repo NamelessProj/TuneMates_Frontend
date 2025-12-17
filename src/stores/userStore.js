@@ -143,7 +143,7 @@ export const useUserStore = create((set) => ({
         try{
             await axios.post(`${baseUrl}/delete/me`,
                 {
-                    password
+                    password: password,
                 },
                 {
                     withCredentials: true,

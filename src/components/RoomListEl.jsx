@@ -29,6 +29,7 @@ const RoomListEl = ({room, token}) => {
         // Remove the element from the DOM if deletion was successful
         if (res) {
             toast("Room deleted successfully.", {type: "success"});
+            ref.current.style.display = "none";
             ref.current.remove();
         } else {
             toast("Failed to delete the room.", {type: "error"});

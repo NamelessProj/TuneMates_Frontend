@@ -114,18 +114,16 @@ const SearchSongs = ({roomId}) => {
 
     /**
      * Handles sending a song to the room.
-     * @param e {React.FormEvent} e - The form submission event.
      * @param songId {string} songId - The Spotify ID of the song to send.
-     * @returns {Promise<void>} A promise that resolves when the song is sent.
+     * @returns {Promise<boolean>} A promise that resolves to true if the song was sent successfully, false otherwise.
      */
-    const handleSendSongToRoom = async (e, songId) => {
-        e.preventDefault();
-
+    const handleSendSongToRoom = async (songId) => {
         NProgress.start();
         const res = await sendSongToRoom(roomId, songId);
         const msg = res ? "Song sent successfully!" : "Failed to send song. Please try again.";
         toast(msg, {type: res ? "success" : "error"});
         NProgress.done();
+        return res;
     }
 
     return (

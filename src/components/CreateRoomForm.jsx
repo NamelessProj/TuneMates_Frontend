@@ -71,7 +71,7 @@ const CreateRoomForm = ({token}) => {
     return (
         <div className="w-full">
             {roomLoading ? <DefaultSpinner /> : (
-                <Card className="!w-full max-w-md mx-auto">
+                <Card color="gray" className="!w-full max-w-md mx-auto">
                     <CardHeader variant="gradient" color="green" className="flex flex-col gap-4 items-center py-3">
                         <Typography variant="h2" className="text-center text-balance">
                             Creating Room...
@@ -100,12 +100,14 @@ const CreateRoomForm = ({token}) => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 label="Room Name"
+                                color="white"
                                 required
                             />
                             <PasswordInput
                                 password={password}
                                 setPassword={setPassword}
                                 label="Room Password"
+                                color="white"
                             />
                             <PasswordInput
                                 password={passwordConfirm}
@@ -113,6 +115,7 @@ const CreateRoomForm = ({token}) => {
                                 label="Confirm Password"
                                 name="confirmPassword"
                                 id="confirmPassword"
+                                color="white"
                             />
                             <Switch
                                 label="Is Active"

@@ -83,11 +83,11 @@ const Header = () => {
                         </MenuList>
                     </Menu>
                 ) : (
-                    <Button size="sm" color="green" className="text-primary-black">
-                        <Link to="login" className="not-green">
+                    <Link to="login" className="not-green">
+                        <Button size="sm" color="green" className="text-primary-black">
                             Login / Register
-                        </Link>
-                    </Button>
+                        </Button>
+                    </Link>
                 )}
             </div>
         </header>

@@ -49,8 +49,8 @@ const EditUser = ({userInfo, token}) => {
     }
 
     return (
-        <Card>
-            <CardHeader>
+        <Card color="gray">
+            <CardHeader color="gray" className="px-4 py-2">
                 <Typography variant="h3">
                     Edit Your Information
                 </Typography>
@@ -71,6 +71,7 @@ const EditUser = ({userInfo, token}) => {
                         onChange={(e) => setUsername(e.target.value)}
                         label="Username"
                         id="username"
+                        color="white"
                     />
                     <Input
                         value={email}
@@ -78,6 +79,7 @@ const EditUser = ({userInfo, token}) => {
                         label="Email"
                         id="email"
                         inputMode="email"
+                        color="white"
                     />
                     <Button
                         color="green"

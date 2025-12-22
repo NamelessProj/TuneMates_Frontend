@@ -63,7 +63,7 @@ const LoginForm = () => {
             {userLoading ? (
                 <DefaultSpinner />
             ) : (
-                <Card className="w-96">
+                <Card color="gray" className="w-96">
                     <CardHeader variant="gradient" color="green" className="mb-4 grid h-28 place-items-center">
                         <Typography variant="h3">
                             Login
@@ -91,10 +91,20 @@ const LoginForm = () => {
                                 label="Email"
                                 name="email"
                                 id="email"
+                                color="white"
                                 required
                             />
-                            <PasswordInput password={password} setPassword={setPassword} />
-                            <Button color="green" variant="gradient" onClick={handleSubmit} type="submit">
+                            <PasswordInput
+                                password={password}
+                                setPassword={setPassword}
+                                color="white"
+                            />
+                            <Button
+                                color="green"
+                                variant="gradient"
+                                onClick={handleSubmit}
+                                type="submit"
+                            >
                                 Login
                             </Button>
                         </form>

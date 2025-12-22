@@ -88,7 +88,7 @@ const RegisterForm = () => {
             {userLoading ? (
                 <DefaultSpinner />
             ) : (
-                <Card className="w-96">
+                <Card color="gray" className="w-96">
                     <CardHeader variant="gradient" color="green" className="mb-4 grid h-28 place-items-center">
                         <Typography variant="h3">
                             Register
@@ -116,6 +116,7 @@ const RegisterForm = () => {
                                 name="email"
                                 size="lg"
                                 label="Email"
+                                color="white"
                                 required
                             />
                             <Input
@@ -125,11 +126,28 @@ const RegisterForm = () => {
                                 name="username"
                                 size="lg"
                                 label="Username"
+                                color="white"
                                 required
                             />
-                            <PasswordInput password={password} setPassword={setPassword} />
-                            <PasswordInput password={confirmPassword} setPassword={setConfirmPassword} label="Confirm Password" name="confirmPassword" id="confirmPassword" />
-                            <Button color="green" variant="gradient" onClick={handleSubmit} type="submit">
+                            <PasswordInput
+                                password={password}
+                                setPassword={setPassword}
+                                color="white"
+                            />
+                            <PasswordInput
+                                password={confirmPassword}
+                                setPassword={setConfirmPassword}
+                                label="Confirm Password"
+                                name="confirmPassword"
+                                id="confirmPassword"
+                                color="white"
+                            />
+                            <Button
+                                color="green"
+                                variant="gradient"
+                                onClick={handleSubmit}
+                                type="submit"
+                            >
                                 Register
                             </Button>
                         </form>

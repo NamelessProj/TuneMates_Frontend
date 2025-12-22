@@ -27,7 +27,7 @@ const Profile = () => {
             {userLoading ? <DefaultSpinner /> : (
                 <div className="flex flex-col items-center justify-center gap-14">
                     <Card variant="gradient" color="green">
-                        <CardHeader color="green" variant="gradient" floated={false} shadow={false}>
+                        <CardHeader color="green" variant="gradient" floated={false} shadow={false} className="py-2 px-4">
                             <Typography variant="h1" className="text-center text-balance">
                                 Profile Page for {userInfo ? userInfo.username : "Guest"}
                             </Typography>

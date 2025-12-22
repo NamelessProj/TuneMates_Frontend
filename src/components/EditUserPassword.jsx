@@ -42,8 +42,8 @@ const EditUserPassword = ({token}) => {
     }
 
     return (
-        <Card>
-            <CardHeader>
+        <Card color="gray">
+            <CardHeader color="gray" className="px-4 py-2">
                 <Typography variant="h3">
                     Edit Your Password
                 </Typography>
@@ -65,6 +65,7 @@ const EditUserPassword = ({token}) => {
                         label="Current Password"
                         id="currentPassword"
                         name="currentPassword"
+                        color="white"
                     />
                     <PasswordInput
                         password={newPassword}
@@ -72,6 +73,7 @@ const EditUserPassword = ({token}) => {
                         label="New Password"
                         id="newPassword"
                         name="newPassword"
+                        color="white"
                     />
                     <PasswordInput
                         password={confirmPassword}
@@ -79,6 +81,7 @@ const EditUserPassword = ({token}) => {
                         label="Confirm New Password"
                         id="confirmNewPassword"
                         name="confirmNewPassword"
+                        color="white"
                     />
                     <Button
                         color="green"

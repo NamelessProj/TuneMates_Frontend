@@ -92,8 +92,8 @@ const DeleteUser = ({token}) => {
                 </DialogBody>
             </Dialog>
 
-            <Card>
-                <CardHeader color="red">
+            <Card color="gray">
+                <CardHeader color="red" className="px-4 py-2">
                     <Typography variant="h3">
                         Deleting your account
                     </Typography>
@@ -108,6 +108,7 @@ const DeleteUser = ({token}) => {
                         <PasswordInput
                             password={password}
                             setPassword={setPassword}
+                            color="white"
                         />
 
                         <Button

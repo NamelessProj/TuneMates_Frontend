@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {useRoomStore} from "../stores/roomStore.js";
 import NProgress from "nprogress";
 import DefaultSpinner from "../components/DefaultSpinner.jsx";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import PasswordInput from "../components/PasswordInput.jsx";
 import focusById from "../utils/focusById.js";
 
@@ -13,9 +13,11 @@ const Home = () => {
     const [error, setError] = useState("");
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
+    const [searchParams] = useSearchParams();
+
     const navigate = useNavigate();
 
-    const {currentRoom, roomError, roomLoading, getRoomBySlug} = useRoomStore();
+    const {currentRoom, roomError, roomLoading, getRoomBySlug, getRoomByCode} = useRoomStore();
 
     useEffect(() => {
         if (currentRoom && hasSubmitted && !roomError) navigate(`/room/slug/${slug}`);
@@ -54,6 +56,11 @@ const Home = () => {
             NProgress.done();
         }
     }
+
+    useEffect(() => {
+        const code = searchParams.get("code");
+        if (code) getRoomByCode(code).then();
+    }, [searchParams, getRoomByCode]);
 
     return (
         <main className="flex flex-col justify-center items-center">

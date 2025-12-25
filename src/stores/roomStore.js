@@ -81,6 +81,29 @@ export const useRoomStore = create((set) => ({
     },
 
     /**
+     * Fetches a room by its unique code.
+     * @param code {string} The unique code of the room to fetch
+     * @returns {Promise<void>} A promise that resolves when the room is fetched
+     */
+    getRoomByCode: async (code) => {
+        set({roomLoading: true, roomError: null});
+        try {
+            const res = await axios.post(`${baseUrl}/code`,
+                {
+                    code
+                },
+                {
+                    method: "POST",
+                });
+            set(() => ({room: res.data.room}));
+        } catch (err) {
+            set({room: null, roomError: err?.response?.data || err?.message || "Failed to load room"});
+        } finally {
+            set({roomLoading: false});
+        }
+    },
+
+    /**
      * Fetches all rooms associated with the authenticated user.
      * @param token {string} The user's authentication token
      * @returns {Promise<void>} A promise that resolves when the rooms are fetched

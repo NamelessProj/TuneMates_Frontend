@@ -28,12 +28,17 @@ const Header = () => {
 
     // Auto logout if token is expired
     useEffect(() => {
-        if (userInfo) {
-            if (!userToken || (userTokenExpiresAt && Date.now() >= userTokenExpiresAt)) {
-                logout();
+        const checkTokenValidity = () => {
+            if (userInfo) {
+                if (!userToken || (userTokenExpiresAt && Date.now() >= userTokenExpiresAt)) {
+                    logout();
+                }
             }
         }
 
+        const intervalId = setInterval(checkTokenValidity, 60_000); // Check every minute
+
+        return () => clearInterval(intervalId);
     }, [userInfo, userToken, userTokenExpiresAt, logout]);
 
     return (

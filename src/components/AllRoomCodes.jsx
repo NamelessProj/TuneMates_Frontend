@@ -1,18 +1,33 @@
-import {Alert, Card, CardBody, CardHeader, Typography} from "@material-tailwind/react";
+import {Alert, Button, Card, CardBody, CardHeader, Typography} from "@material-tailwind/react";
 import {useCodeStore} from "../stores/CodeStore.js";
 import {useEffect} from "react";
 import {useUserStore} from "../stores/userStore.js";
 import DefaultSpinner from "./DefaultSpinner.jsx";
 import {format} from "date-fns";
 import CopyInClipboard from "./CopyInClipboard.jsx";
+import NProgress from "nprogress";
 
 const AllRoomCodes = ({roomId}) => {
     const {token} = useUserStore();
-    const {allCodes, codesLoading, codesError, getAllCodesForRoom} = useCodeStore();
+    const {allCodes, codesLoading, codesError, getAllCodesForRoom, deleteCode} = useCodeStore();
 
     useEffect(() => {
         if (token) getAllCodesForRoom(roomId, token).then();
     }, [getAllCodesForRoom, roomId, token]);
+
+    /**
+     * Handles the deletion of a code.
+     * @param code {string} - The code to be deleted.
+     * @returns {Promise<void>} - A promise that resolves when the code is deleted.
+     */
+    const handleDeleteCode = async (code) => {
+        if (!token) return;
+
+        NProgress.start();
+        await deleteCode(code, token);
+        await getAllCodesForRoom(roomId, token);
+        NProgress.done();
+    }
 
     /**
      * Renders a single code element with copy functionality and expiration info.
@@ -24,11 +39,20 @@ const AllRoomCodes = ({roomId}) => {
         const link = `${window.location.origin}?code=${code.code}`;
 
         return (
-            <div className="">
+            <div>
                 <CopyInClipboard value={link} />
                 <Typography variant="small">
                     Expires at: {format(code.expiresAt, "eeee dd MMM yyyy kk:mm")}
                 </Typography>
+
+                <Button
+                    size="sm"
+                    color="red"
+                    className="mt-2"
+                    onClick={() => handleDeleteCode(code.code)}
+                >
+                    Delete Code
+                </Button>
             </div>
         );
     }

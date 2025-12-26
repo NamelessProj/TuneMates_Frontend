@@ -3,6 +3,7 @@ import {useSpotifyStore} from "../stores/spotifyStore.js";
 import {Alert, Button, Input, Switch} from "@material-tailwind/react";
 import SelectPlaylistWrapper from "./SelectPlaylistWrapper.jsx";
 import NProgress from "nprogress";
+import RoomCodes from "./RoomCodes.jsx";
 
 const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
     const [name, setName] = useState("");
@@ -50,7 +51,9 @@ const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
     }
 
     return (
-        <div className="w-full flex justify-center items-center">
+        <div className="w-full flex flex-col justify-center items-center gap-3">
+            <RoomCodes roomId={room.id} />
+
             <form className="max-w-[26rem] flex flex-col gap-6 flex-1" onSubmit={handleSubmit}>
                 {roomError ? (
                     <div className="flex justify-center items-center w-full">

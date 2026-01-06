@@ -59,9 +59,7 @@ const Home = () => {
 
     useEffect(() => {
         const code = searchParams.get("code");
-        setHasSubmitted(true);
-        if (code) getRoomByCode(code).then();
-        setHasSubmitted(false);
+        if (code) getRoomByCode(code).then(() => setHasSubmitted(true));
     }, [searchParams, getRoomByCode]);
 
     return (

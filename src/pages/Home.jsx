@@ -59,8 +59,10 @@ const Home = () => {
 
     useEffect(() => {
         const code = searchParams.get("code");
-        if (code) getRoomByCode(code).then(() => setHasSubmitted(true));
-    }, [searchParams, getRoomByCode]);
+        if (code) getRoomByCode(code).then((room) => {
+            if (room) navigate(`/room/slug/${room.slug}`);
+        });
+    }, [searchParams, getRoomByCode, navigate]);
 
     return (
         <main className="flex flex-col justify-center items-center">

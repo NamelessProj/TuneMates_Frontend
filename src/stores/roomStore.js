@@ -95,10 +95,10 @@ export const useRoomStore = create((set) => ({
                 {
                     method: "POST",
                 });
-            set(() => ({room: res.data.room}));
+            set(() => ({currentRoom: res.data.room}));
             Cookies.set(roomKey, JSON.stringify(res.data.room));
         } catch (err) {
-            set({room: null, roomError: err?.response?.data || err?.message || "Failed to load room"});
+            set({currentRoom: null, roomError: err?.response?.data || err?.message || "Failed to load room"});
         } finally {
             set({roomLoading: false});
         }

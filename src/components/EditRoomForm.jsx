@@ -52,7 +52,7 @@ const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
 
     return (
         <div className="w-full flex flex-col justify-center items-center gap-3">
-            <RoomCodes roomId={room.id} />
+            {room ? <RoomCodes roomId={room?.id} /> : null}
 
             <form className="max-w-[26rem] flex flex-col gap-6 flex-1" onSubmit={handleSubmit}>
                 {roomError ? (

@@ -2,11 +2,12 @@ import {Button, Menu, MenuHandler, MenuItem, MenuList, Typography} from "@materi
 import {useAuthStore} from "../stores/authStore.js";
 import NProgress from "nprogress";
 import {useEffect} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 
 const Header = () => {
     const {userInfo, userToken, userTokenExpiresAt, logout} = useAuthStore();
+    const navigate = useNavigate();
 
     /**
      * Handles the logout process when the user clicks the logout button.
@@ -32,6 +33,7 @@ const Header = () => {
             if (userInfo) {
                 if (!userToken || (userTokenExpiresAt && Date.now() >= userTokenExpiresAt)) {
                     logout();
+                    navigate("/");
                 }
             }
         }
@@ -39,7 +41,7 @@ const Header = () => {
         const intervalId = setInterval(checkTokenValidity, 60_000); // Check every minute
 
         return () => clearInterval(intervalId);
-    }, [userInfo, userToken, userTokenExpiresAt, logout]);
+    }, [userInfo, userToken, userTokenExpiresAt, logout, navigate]);
 
     return (
         <header className="flex flex-col-reverse gap-2 justify-center items-center my-2 relative">

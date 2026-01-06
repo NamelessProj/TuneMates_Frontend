@@ -63,7 +63,7 @@ export const useCodeStore = create((set) => ({
                     },
                     method: "GET",
                 });
-            set(() => ({codes: res.data.codes}));
+            set(() => ({allCodes: res.data.codes}));
         } catch (err) {
             set({codesError: err?.response?.data || err?.message || "Failed to get codes"});
         } finally {

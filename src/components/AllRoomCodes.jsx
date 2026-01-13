@@ -1,19 +1,19 @@
 import {Alert, Button, Card, CardBody, CardHeader, Typography} from "@material-tailwind/react";
 import {useCodeStore} from "../stores/CodeStore.js";
-import {useEffect} from "react";
-import {useUserStore} from "../stores/userStore.js";
+import React, {useEffect} from "react";
 import DefaultSpinner from "./DefaultSpinner.jsx";
 import {format} from "date-fns";
 import CopyInClipboard from "./CopyInClipboard.jsx";
 import NProgress from "nprogress";
 
-const AllRoomCodes = ({roomId}) => {
-    const {token} = useUserStore();
+const AllRoomCodes = React.memo(({roomId, token, refreshCodesTrigger}) => {
     const {allCodes, codesLoading, codesError, getAllCodesForRoom, deleteCode} = useCodeStore();
 
     useEffect(() => {
+        NProgress.start();
         if (token) getAllCodesForRoom(roomId, token).then();
-    }, [getAllCodesForRoom, roomId, token]);
+        NProgress.done();
+    }, [getAllCodesForRoom, roomId, token, refreshCodesTrigger]);
 
     /**
      * Handles the deletion of a code.
@@ -21,8 +21,7 @@ const AllRoomCodes = ({roomId}) => {
      * @returns {Promise<void>} - A promise that resolves when the code is deleted.
      */
     const handleDeleteCode = async (code) => {
-        if (!token) return;
-
+        console.log("Deleting code:", code);
         NProgress.start();
         await deleteCode(code, token);
         await getAllCodesForRoom(roomId, token);
@@ -39,7 +38,7 @@ const AllRoomCodes = ({roomId}) => {
         const link = `${window.location.origin}?code=${code.code}`;
 
         return (
-            <div>
+            <div className="flex flex-col gap-1 p-4 bg-gray-800 rounded-lg">
                 <CopyInClipboard value={link} />
                 <Typography variant="small">
                     Expires at: {format(code.expiresAt, "eeee dd MMM yyyy kk:mm")}
@@ -64,21 +63,21 @@ const AllRoomCodes = ({roomId}) => {
      * @constructor
      */
     const CodeList = ({codes}) => {
-        if (codes.length === 0) {
+        if (Array.isArray(codes) && codes?.length >= 1) {
             return (
-                <div className="flex justify-center items-center">
-                    <Alert color="amber">
-                        No codes have been generated for this room yet.
-                    </Alert>
+                <div className="flex flex-col gap-4">
+                    {codes?.map((code, i) => (
+                        <CodeEl key={i} code={code} />
+                    ))}
                 </div>
             );
         }
 
         return (
-            <div className="flex flex-col gap-4">
-                {codes.map((code, i) => (
-                    <CodeEl key={i} code={code} />
-                ))}
+            <div className="flex justify-center items-center">
+                <Alert color="amber">
+                    No codes have been generated for this room yet.
+                </Alert>
             </div>
         );
     }
@@ -109,6 +108,6 @@ const AllRoomCodes = ({roomId}) => {
             </CardBody>
         </Card>
     );
-};
+});
 
 export default AllRoomCodes;

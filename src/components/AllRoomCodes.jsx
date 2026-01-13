@@ -21,7 +21,6 @@ const AllRoomCodes = React.memo(({roomId, token, refreshCodesTrigger}) => {
      * @returns {Promise<void>} - A promise that resolves when the code is deleted.
      */
     const handleDeleteCode = async (code) => {
-        console.log("Deleting code:", code);
         NProgress.start();
         await deleteCode(code, token);
         await getAllCodesForRoom(roomId, token);

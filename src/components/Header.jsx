@@ -20,6 +20,7 @@ const Header = () => {
         try{
             NProgress.start();
             logout();
+            navigate("/");
         }catch(err){
             toast("Failed to logout: " + err.message, {type: "error"});
         }finally{

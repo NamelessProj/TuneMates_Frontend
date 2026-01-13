@@ -16,16 +16,17 @@ const CreateRoomForm = ({token}) => {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [isActive, setIsActive] = useState(true);
     const [error, setError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const navigate = useNavigate();
 
     const {userInfo, userToken} = useAuthStore();
-    const {room, roomError, roomLoading, createRoom} = useRoomStore();
+    const {newRoom, roomError, roomLoading, createRoom} = useRoomStore();
     const {spotifyError, spotifyLoading, userPlaylists, getUserPlaylist} = useSpotifyStore();
 
     useEffect(() => {
-        if (room && !roomError) navigate("/rooms");
-    }, [room, roomError, navigate]);
+        if (newRoom && !roomError && isSubmitting) navigate("/rooms");
+    }, [newRoom, roomError, isSubmitting, navigate]);
 
     useEffect(() => {
         if (!userInfo || !userToken) navigate("/login");
@@ -42,6 +43,8 @@ const CreateRoomForm = ({token}) => {
      */
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setIsSubmitting(false);
 
         if (name.trim().length < 3 || name.trim().length > 50) {
             setError("Name is required and must be between 3 and 50 characters");
@@ -66,6 +69,7 @@ const CreateRoomForm = ({token}) => {
             isActive
         }, token);
         NProgress.done();
+        setIsSubmitting(true);
     }
 
     return (

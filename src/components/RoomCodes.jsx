@@ -1,18 +1,20 @@
 import {useCodeStore} from "../stores/CodeStore.js";
 import AllRoomCodes from "./AllRoomCodes.jsx";
 import {useState} from "react";
-import {useUserStore} from "../stores/userStore.js";
 import DefaultSpinner from "./DefaultSpinner.jsx";
 import {Alert, Button, Input} from "@material-tailwind/react";
 import PasswordInput from "./PasswordInput.jsx";
 import NProgress from "nprogress";
+import {useAuthStore} from "../stores/authStore.js";
 
 const RoomCodes = ({roomId}) => {
     const [expiresInHours, setExpiresInHours] = useState(1);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const {token} = useUserStore();
+    const [refreshCodesTrigger, setRefreshCodesTrigger] = useState(0);
+
+    const {userToken} = useAuthStore();
     const {allCodes, codeError, codeLoading, getCodeForRoom, getAllCodesForRoom} = useCodeStore();
     const codeLimitPerRoom = 1;
 
@@ -24,33 +26,54 @@ const RoomCodes = ({roomId}) => {
     const handleGenerateCode = async (e) => {
         e.preventDefault();
 
-        if (!token) return;
+        setError("");
 
-        if (expiresInHours <= 0) {
+        console.log("Token:", userToken);
+
+        if (!userToken) {
+            setError("User is not authenticated. Try logging in again.");
+            return;
+        }
+
+        const expires = Math.floor(expiresInHours);
+
+        if (expires <= 0) {
             setError("Expiration time must be greater than 0 hours.");
             return;
         }
 
-        if (expiresInHours > 48) {
+        if (expires > 48) {
             setError("Expiration time cannot exceed 48 hours.");
             return;
         }
 
+        if (password.trim() === "") {
+            setError("Password cannot be empty.");
+            return;
+        }
+
         NProgress.start();
-        await getCodeForRoom(roomId, password, expiresInHours, token);
-        await getAllCodesForRoom(roomId, token); // Refresh the list of codes
+        await getCodeForRoom(roomId, password, expires, userToken);
+        await getAllCodesForRoom(roomId, userToken); // Refresh the list of codes
+        setRefreshCodesTrigger(prev => prev + 1);
         NProgress.done();
     }
 
     return (
-        <div className="bg-gray-700 rounded-lg px-4 py-2">
+        <div className="bg-gray-900 rounded-lg px-4 py-2">
             {codeLoading ? (
                 <div className="flex justify-center items-center w-full min-h-20">
                     <DefaultSpinner />
                 </div>
             ) : (
                 <div>
-                    {allCodes?.length < codeLimitPerRoom ? (
+                    {(allCodes?.length >= codeLimitPerRoom) ? (
+                        <div className="flex justify-center mb-6">
+                            <Alert color="amber">
+                                You have reached the maximum number of room codes ({codeLimitPerRoom}) for this room.
+                            </Alert>
+                        </div>
+                    ) : (
                         <form className="flex flex-col gap-3 mb-6" onSubmit={handleGenerateCode}>
                             {codeError ? (
                                 <Alert color="red">
@@ -81,8 +104,8 @@ const RoomCodes = ({roomId}) => {
 
                             <PasswordInput
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                label="Optional Password"
+                                setPassword={setPassword}
+                                label="Room's Password"
                                 id="codePassword"
                                 name="codePassword"
                                 color="white"
@@ -97,15 +120,13 @@ const RoomCodes = ({roomId}) => {
                                 Generate Room Code
                             </Button>
                         </form>
-                    ) : (
-                        <div className="flex justify-center mb-6">
-                            <Alert color="amber">
-                                You have reached the maximum number of room codes ({codeLimitPerRoom}) for this room.
-                            </Alert>
-                        </div>
                     )}
 
-                    <AllRoomCodes roomId={roomId} />
+                    <AllRoomCodes
+                        roomId={roomId}
+                        token={userToken}
+                        refreshCodesTrigger={refreshCodesTrigger}
+                    />
                 </div>
             )}
         </div>

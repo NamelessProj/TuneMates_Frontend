@@ -7,11 +7,11 @@ import PasswordInput from "./PasswordInput.jsx";
 import NProgress from "nprogress";
 import {useAuthStore} from "../stores/authStore.js";
 
-const RoomCodes = ({roomId}) => {
-    const codeLimitPerRoom = 1;
-    const limitTimeMaxHours = 48;
-    const limitTimeMinHours = 1;
+const codeLimitPerRoom = 1;
+const limitTimeMaxHours = 48;
+const limitTimeMinHours = 1;
 
+const RoomCodes = ({roomId}) => {
     const [expiresInHours, setExpiresInHours] = useState(limitTimeMinHours);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");

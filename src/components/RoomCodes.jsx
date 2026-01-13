@@ -8,7 +8,11 @@ import NProgress from "nprogress";
 import {useAuthStore} from "../stores/authStore.js";
 
 const RoomCodes = ({roomId}) => {
-    const [expiresInHours, setExpiresInHours] = useState(1);
+    const codeLimitPerRoom = 1;
+    const limitTimeMaxHours = 48;
+    const limitTimeMinHours = 1;
+
+    const [expiresInHours, setExpiresInHours] = useState(limitTimeMinHours);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -16,7 +20,6 @@ const RoomCodes = ({roomId}) => {
 
     const {userToken} = useAuthStore();
     const {allCodes, codeError, codeLoading, getCodeForRoom, getAllCodesForRoom} = useCodeStore();
-    const codeLimitPerRoom = 1;
 
     /**
      * Handles the generation of a room code.
@@ -28,22 +31,25 @@ const RoomCodes = ({roomId}) => {
 
         setError("");
 
-        console.log("Token:", userToken);
-
         if (!userToken) {
             setError("User is not authenticated. Try logging in again.");
             return;
         }
 
-        const expires = Math.floor(expiresInHours);
-
-        if (expires <= 0) {
-            setError("Expiration time must be greater than 0 hours.");
+        if (isNaN(expiresInHours)) {
+            setError("Expiration time must be a valid number.");
             return;
         }
 
-        if (expires > 48) {
-            setError("Expiration time cannot exceed 48 hours.");
+        const expires = Math.floor(expiresInHours);
+
+        if (expires < limitTimeMinHours) {
+            setError(`Expiration time must be greater or equal to ${limitTimeMinHours} hour.`);
+            return;
+        }
+
+        if (expires > limitTimeMaxHours) {
+            setError(`Expiration time cannot exceed ${limitTimeMaxHours} hours.`);
             return;
         }
 
@@ -97,8 +103,8 @@ const RoomCodes = ({roomId}) => {
                                 name="expiresInHours"
                                 id="expiresInHours"
                                 color="white"
-                                min={1}
-                                max={48}
+                                min={limitTimeMinHours}
+                                max={limitTimeMaxHours}
                                 required
                             />
 

@@ -51,10 +51,10 @@ const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
     }
 
     return (
-        <div className="w-full flex flex-col justify-center items-center gap-3">
+        <div className="w-full flex flex-col justify-center items-center gap-12">
             {room ? <RoomCodes roomId={room?.id} /> : null}
 
-            <form className="max-w-[26rem] flex flex-col gap-6 flex-1" onSubmit={handleSubmit}>
+            <form className="max-w-[26rem] flex flex-col gap-6 flex-1 bg-gray-900 rounded-lg p-12" onSubmit={handleSubmit}>
                 {roomError ? (
                     <div className="flex justify-center items-center w-full">
                         <Alert color="red">
@@ -75,6 +75,7 @@ const EditRoomForm = ({room, userToken, userInfo, roomError, editRoom}) => {
                     value={name}
                     onChange={e => setName(e.target.value)}
                     label="Room name"
+                    color="white"
                 />
 
                 <Switch

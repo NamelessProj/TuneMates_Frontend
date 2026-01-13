@@ -33,6 +33,7 @@ const Header = () => {
         const checkTokenValidity = () => {
             if (userInfo) {
                 if (!userToken || (userTokenExpiresAt && Date.now() >= userTokenExpiresAt)) {
+                    toast("Session expired. Logging out...", {type: "info"});
                     logout();
                     navigate("/");
                 }

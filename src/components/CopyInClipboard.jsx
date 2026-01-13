@@ -3,7 +3,7 @@ import CopyInClipboardButton from "./CopyInClipboardButton.jsx";
 
 const CopyInClipboard = ({value="", className="", textClassName="", buttonClassName=""}) => {
     return (
-        <div className={`relative rounded-xl max-w-sm bg-gray-800 px-4 py-2 ${className}`}>
+        <div className={`relative rounded-xl bg-gray-800 px-4 py-2 ${className}`}>
             <div className="overflow-hidden">
                 <Typography variant="lead" className={`${textClassName}`}>
                     {value}

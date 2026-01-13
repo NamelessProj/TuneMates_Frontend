@@ -7,6 +7,7 @@ const roomKey = 'TuneMatesCurrentRoom';
 
 export const useRoomStore = create((set) => ({
     room: null,
+    newRoom: null,
     currentRoom: (() => {
         try {
             const c = Cookies.get(roomKey);
@@ -138,7 +139,7 @@ export const useRoomStore = create((set) => ({
      * @returns {Promise<void>} A promise that resolves when the room is created
      */
     createRoom: async (data, token) => {
-        set({roomLoading: true, roomError: null, room: null});
+        set({roomLoading: true, roomError: null, newRoom: null});
         try {
             const res = await axios.post(`${baseUrl}`, data,{
                 withCredentials: true,
@@ -147,9 +148,9 @@ export const useRoomStore = create((set) => ({
                 },
                 method: "POST",
             });
-            set(() => ({room: res.data.room}));
+            set(() => ({newRoom: res.data.room}));
         } catch (err) {
-            set({room: null, roomError: err?.response?.data || err?.message || "Failed to create room"});
+            set({newRoom: null, roomError: err?.response?.data || err?.message || "Failed to create room"});
         } finally {
             set({roomLoading: false});
         }
